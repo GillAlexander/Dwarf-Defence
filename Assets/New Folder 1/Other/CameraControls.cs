@@ -38,7 +38,7 @@ public class CameraControls : MonoBehaviour
         if( Input.GetKey( KeyCode.E ) )
             targetPosition += transform.up * movementSpeed;
 
-        if( Input.GetMouseButton( 1 ) )
+        if( Input.GetMouseButton( 2 ) )
         {
             Cursor.visible = false;
             targetRotationY += Input.GetAxis( "Mouse X" ) * rotationSpeed;

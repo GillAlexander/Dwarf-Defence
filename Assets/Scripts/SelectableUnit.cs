@@ -4,8 +4,7 @@ using System.Linq;
 using System.Collections;
 using System.Collections.Generic;
 
-
-public class SelectableUnitComponent : MonoBehaviour
+public class SelectableUnit : MonoBehaviour
 {
     public GameObject selectionCircle;
 }

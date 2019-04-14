@@ -2,11 +2,14 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GameController : MonoBehaviour {
+public class MoveUnitsToRenderPath : MonoBehaviour {
+
+    LineRenderer unitLine;
+
     void Start() {
 
     }
-
+    
     void Update() {
 
     }

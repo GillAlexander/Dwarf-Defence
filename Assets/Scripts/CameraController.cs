@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 
-public class CameraController : MonoBehaviour
-{
+public class CameraController : MonoBehaviour {
+
     public float panspeed = 12;
     public float screenBoarderThickness = 10;
     public Camera camera;
@@ -15,28 +15,32 @@ public class CameraController : MonoBehaviour
 
     float test = 1;
     // Update is called once per frame
-    void Update()
-    {
+    void Update() {
+
+        float xAxisValue = Input.GetAxis("Horizontal");
+        float zAxisValue = Input.GetAxis("Vertical");
+
         Vector3 position = transform.position;
 
-        if (Input.GetKey("w") || Input.mousePosition.y >= Screen.height - screenBoarderThickness){
-            //position.z += panspeed * Time.deltaTime;
+        if (Input.GetKey("w") || Input.mousePosition.y >= Screen.height - screenBoarderThickness) {
+            position.z += panspeed * Time.deltaTime;
 
             //position += Vector3.forward * speed * Time.deltaTime;
             //camera.transform.Translate(Vector3.forward * Time.deltaTime);
-            transform.position += this.transform.forward * speed * Time.deltaTime;
+            //transform.position += this.transform.forward * speed * Time.deltaTime;s
+            //transform.Translate(new Vector3(xAxisValue, 0.0f, zAxisValue));
+            //transform.position += transform.forward * Time.deltaTime * 50000000;
+
+
         }
-        if (Input.GetKey("s") || Input.mousePosition.y <= screenBoarderThickness)
-        {
+        if (Input.GetKey("s") || Input.mousePosition.y <= screenBoarderThickness) {
             position.z -= panspeed * Time.deltaTime;
 
         }
-        if (Input.GetKey("d"))
-        {
+        if (Input.GetKey("d")) {
             position.x += panspeed * Time.deltaTime;
         }
-        if (Input.GetKey("a"))
-        {
+        if (Input.GetKey("a")) {
             position.x -= panspeed * Time.deltaTime;
         }
 
@@ -49,17 +53,15 @@ public class CameraController : MonoBehaviour
         transform.position = position;
 
 
-        
-        if (Input.mousePosition.x >= Screen.width - screenBoarderThickness)
-        {
+
+        if (Input.mousePosition.x >= Screen.width - screenBoarderThickness) {
             test++;
             transform.rotation = Quaternion.Euler(50, test, 0);
         }
 
-        if (Input.mousePosition.x <= screenBoarderThickness)
-        {
+        if (Input.mousePosition.x <= screenBoarderThickness) {
             test--;
             transform.rotation = Quaternion.Euler(50, test, 0);
         }
-    }   
+    }
 }
