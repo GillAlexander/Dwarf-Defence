@@ -37,6 +37,16 @@ public class UnitSelectionComponent : MonoBehaviour {
             foreach (var selectableObject in FindObjectsOfType<SelectableUnitComponent>()) {
                 if (IsWithinSelectionBounds(selectableObject.gameObject)) {
                     selectedObjects.Add(selectableObject);
+
+                    //Debug.Log(selectedObjects.Count);
+                }
+            }
+            agents = new List<NavMeshAgent>();
+            foreach (var agent in FindObjectsOfType<NavMeshAgent>()) {
+                if (IsWithinSelectionBounds(agent.gameObject)) {
+                    
+                    agents.Add(agent);
+
                 }
             }
 

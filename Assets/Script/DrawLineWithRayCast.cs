@@ -18,8 +18,7 @@ public class DrawLineWithRayCast : MonoBehaviour {
     void Update() {
         time += Time.deltaTime;
 
-        Debug.Log(readySetGo);
-        if (time > 0.2) {
+        if (time > 0.08f) {
             
             //StartCoroutine(SavePoint());
             GeneratePositions();
@@ -32,7 +31,8 @@ public class DrawLineWithRayCast : MonoBehaviour {
             readySetGo = true;
             Debug.Log("Move the selected units to the generated vector3 positions in the positionslist");
         }
-        if (Input.GetKeyDown("space")) {
+        if (Input.GetMouseButtonDown(0)) {
+
             positionList.Clear();
         }
     }
