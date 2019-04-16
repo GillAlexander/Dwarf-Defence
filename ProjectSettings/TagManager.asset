@@ -5,6 +5,9 @@ TagManager:
   serializedVersion: 2
   tags:
   - Unit
+  - RedBall
+  - Enemy
+  - Coffert
   layers:
   - Default
   - TransparentFX
