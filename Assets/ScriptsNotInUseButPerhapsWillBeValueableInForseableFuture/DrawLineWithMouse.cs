@@ -4,14 +4,14 @@ using UnityEngine;
 
 public class DrawLineWithMouse : MonoBehaviour {
 
-    public Camera camera;
+    //public Camera camera;
     public Material lineMaterial;
     public float lineWidth;
     public float depth = 5;
 
     private Vector3? lineStartPoint = null;
     void Start() {
-        camera.GetComponent<Camera>();
+        GetComponent<Camera>().GetComponent<Camera>();
     }
     
     void Update() {
@@ -43,7 +43,7 @@ public class DrawLineWithMouse : MonoBehaviour {
     }
 
     private Vector3 GetMouseCameraPoint() {
-        var ray = camera.ScreenPointToRay(Input.mousePosition);
+        var ray = GetComponent<Camera>().ScreenPointToRay(Input.mousePosition);
         return ray.origin + ray.direction * depth;
 
     }

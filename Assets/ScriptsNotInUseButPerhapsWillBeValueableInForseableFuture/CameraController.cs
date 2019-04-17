@@ -4,9 +4,8 @@ public class CameraController : MonoBehaviour {
 
     public float panspeed = 12;
     public float screenBoarderThickness = 10;
-    public Camera camera;
     public Vector2 mapLimit;
-    float speed = 5;
+    //float speed = 5;
     //float cameraRotateSpeed = 1;
     public float scrollspeed = 20000;
     float minimumHeight = 8, maximumHeight = 25;

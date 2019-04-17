@@ -54,7 +54,7 @@ public class UnitSelectionComponent : MonoBehaviour {
             sb.AppendLine(string.Format("Selecting [{0}] Units", selectedObjects.Count));
             foreach (var selectedObject in selectedObjects)
                 sb.AppendLine("-> " + selectedObject.gameObject.name);
-            Debug.Log(sb.ToString());
+            //Debug.Log(sb.ToString());
 
             isSelecting = false;
         }

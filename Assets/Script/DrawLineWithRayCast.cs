@@ -29,7 +29,6 @@ public class DrawLineWithRayCast : MonoBehaviour {
             //Move the selected units to the generated vector3 positions in the positionslist
 
             readySetGo = true;
-            Debug.Log("Move the selected units to the generated vector3 positions in the positionslist");
         }
         if (Input.GetMouseButtonDown(0)) {
 
