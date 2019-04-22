@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace StatePattern {
     public class Creeper : EnemyScript{
 
         EnemyFSM creeperMode = EnemyFSM.Stroll;
@@ -16,7 +15,7 @@ namespace StatePattern {
 
 
         //Update the creeper's state
-        public override void UpdateEnemy(Transform playerObj) {
+        public override void UpdateEnemy(Transform playerObj, Transform treasureChest) {
             //The distance between the Creeper and the player
             float distance = (base.enemyObj.position - playerObj.position).magnitude;
 
@@ -53,5 +52,3 @@ namespace StatePattern {
             DoAction(playerObj, creeperMode);
         }
     }
-}
-

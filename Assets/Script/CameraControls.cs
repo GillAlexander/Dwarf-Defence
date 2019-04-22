@@ -10,7 +10,7 @@ public class CameraControls : MonoBehaviour {
     public Quaternion targetRotation;
     float targetRotationY;
     float targetRotationX;
-    float floatY = 1;
+    //float floatY = 1;
 
     void Start() {
         targetRotation = transform.rotation;
