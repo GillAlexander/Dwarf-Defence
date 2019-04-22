@@ -27,9 +27,13 @@ public class Goblin : EnemyAI {
                 if (distance < 5) {
                     goblinState = enemyStates.Attack;
                 }
+                if (distanceToTreasure < 15) {
+                    goblinState = enemyStates.moveTowardsChest;
+                }
                 if (restTimer > 4) {
                     goblinState = enemyStates.Patrol;
                 }
+
                 break;
 
             case enemyStates.Patrol:
@@ -40,7 +44,7 @@ public class Goblin : EnemyAI {
                     goblinState = enemyStates.Idle;
                     restTimer = 0;
                 }
-                if (distanceToTreasure < 5) {
+                if (distanceToTreasure < 15) {
                     goblinState = enemyStates.moveTowardsChest;
                 }
                 break;
@@ -49,11 +53,17 @@ public class Goblin : EnemyAI {
                 if (distance >= 5) {
                     goblinState = enemyStates.Patrol;
                 }
+                //if (distanceToTreasure > distance) {
+                //    goblinState = enemyStates.moveTowardsChest;
+                //}
                 break;
 
             case enemyStates.moveTowardsChest:
-                goblinState = enemyStates.moveTowardsChest;
-                if (distanceToTreasure < 1) {
+
+                if (distance < 2) {
+                    goblinState = enemyStates.Attack;
+                }
+                if (distanceToTreasure < 1.5) {
                     goblinState = enemyStates.Steal;
                 }
                 break;

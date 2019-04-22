@@ -28,7 +28,7 @@ public class EnemyAI : baseUnit {
 
     //Update enemy behaviour based on state
     protected void UpdateState(Transform playerObj, Transform treasureChest, enemyStates enemyState) {
-        float fleeSpeed = 3f;
+        float fleeSpeed = 2.5f;
         float strollSpeed = 2f;
         float attackSpeed = 5f;
         switch (enemyState) {
@@ -38,7 +38,7 @@ public class EnemyAI : baseUnit {
 
             case enemyStates.Patrol:
                 //Move randomly between random points 
-                Vector3 randomPosition = new Vector3(Random.Range(0, 10), 0f, Random.Range(0, 10));
+                Vector3 randomPosition = new Vector3(Random.Range(0, 360), 0f, Random.Range(0, 360));
                 enemyObj.rotation = Quaternion.LookRotation(enemyObj.position - randomPosition);
                 enemyObj.Translate(enemyObj.forward * strollSpeed * Time.deltaTime);
                 Debug.Log("Patrol Bitch");
@@ -47,6 +47,7 @@ public class EnemyAI : baseUnit {
             case enemyStates.Attack:
                 enemyObj.rotation = Quaternion.LookRotation(playerObj.position - enemyObj.position);
                 enemyObj.Translate(enemyObj.forward * strollSpeed * Time.deltaTime);
+                Debug.Log("Attack Bitch");
                 break;
 
             case enemyStates.moveTowardsChest:
