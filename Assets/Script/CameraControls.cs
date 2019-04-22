@@ -32,16 +32,16 @@ public class CameraControls : MonoBehaviour {
         transform.rotation = Quaternion.Lerp(transform.rotation, targetRotation, (1.0f - smoothness));
 
         if (Input.GetKey(KeyCode.W) || Input.mousePosition.y >= Screen.height - screenBoarderThickness) {
-            transform.position += Vector3.ProjectOnPlane(Camera.main.transform.forward, Vector3.up) * 5 * Time.deltaTime;
+            transform.position += Vector3.ProjectOnPlane(Camera.main.transform.forward, Vector3.up) * movementSpeed * Time.deltaTime;
         }
         if (Input.GetKey(KeyCode.A)) {
-            transform.position += Vector3.ProjectOnPlane(-Camera.main.transform.right, Vector3.up) * 5 * Time.deltaTime;
+            transform.position += Vector3.ProjectOnPlane(-Camera.main.transform.right, Vector3.up) * movementSpeed * Time.deltaTime;
         }
         if (Input.GetKey(KeyCode.S) || Input.mousePosition.y <= screenBoarderThickness) {
-            transform.position += Vector3.ProjectOnPlane(-Camera.main.transform.forward, Vector3.up) * 5 * Time.deltaTime;
+            transform.position += Vector3.ProjectOnPlane(-Camera.main.transform.forward, Vector3.up) *movementSpeed * Time.deltaTime;
         }
         if (Input.GetKey(KeyCode.D)) {
-            transform.position += Vector3.ProjectOnPlane(Camera.main.transform.right, Vector3.up) * 5 * Time.deltaTime;
+            transform.position += Vector3.ProjectOnPlane(Camera.main.transform.right, Vector3.up) * movementSpeed * Time.deltaTime;
         }
         if (Input.GetKey(KeyCode.Q)) {
             transform.position -= transform.up * movementSpeed;
@@ -59,6 +59,12 @@ public class CameraControls : MonoBehaviour {
         if (Input.mousePosition.x <= screenBoarderThickness) {
             targetRotationY--;
             targetRotation = Quaternion.Euler(targetRotationX, targetRotationY, 0.0f);
+        }
+        if (Input.GetKeyDown(KeyCode.LeftShift)) {
+            movementSpeed *= 2;
+        }
+        if (Input.GetKeyUp(KeyCode.LeftShift)) {
+            movementSpeed /= 2;
         }
 
     }
