@@ -14,7 +14,7 @@ using UnityEngine;
         //A list that will hold all enemies
         List<EnemyAI> enemies = new List<EnemyAI>();
         List<FriendlyUnitAI> friendlies = new List<FriendlyUnitAI>();
-        public List<Vector3> dwarfVector3 = new List<Vector3>();
+        public List<Transform> dwarfTransform = new List<Transform>();
 
         void Start() {
             //Add the enemies we have
@@ -29,7 +29,7 @@ using UnityEngine;
         void Update() {
             //Update all enemies to see if they should change state and move/attack player
             for (int i = 0; i < enemies.Count; i++) {
-                enemies[i].UpdateEnemy(playerObj.transform, treasureChest.transform, dwarfVector3);
+                enemies[i].UpdateEnemy(playerObj.transform, treasureChest.transform, dwarfTransform);
             }
             for (int i = 0; i < friendlies.Count; i++) {
                 friendlies[i].UpdateFriendlyTroops(treasureChest.transform);

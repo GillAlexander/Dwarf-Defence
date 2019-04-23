@@ -12,7 +12,7 @@ public class Troll : EnemyAI {
         health = 250;
     }
     float restTimer;
-    public override void UpdateEnemy(Transform playerObj, Transform treasureChest, List<Vector3> dwarfVector3) {
+    public override void UpdateEnemy(Transform playerObj, Transform treasureChest, List<Transform> dwarfVector3) {
         float distance = (base.enemyObj.position - playerObj.position).magnitude;
         float distanceToTreasure = (base.enemyObj.position - treasureChest.position).magnitude;
         restTimer += Time.deltaTime;

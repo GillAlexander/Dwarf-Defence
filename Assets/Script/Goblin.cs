@@ -15,43 +15,44 @@ public class Goblin : EnemyAI {
     }
     bool gold = false;
     float restTimer;
-    public override void UpdateEnemy(Transform playerObj, Transform treasureChest, List<Vector3> dwarfVector3) {
+    public override void UpdateEnemy(Transform playerObj, Transform treasureChest, List<Transform> dwarfTransform) {
         float distance = (base.enemyObj.position - playerObj.position).magnitude;
         float distanceToTreasure = (base.enemyObj.position - treasureChest.position).magnitude;
         
         restTimer += Time.deltaTime;
 
 
-        Vector3 GetClosestEnemy(List<Vector3> allDwarfes) {
-            Vector3 bestTarget = new Vector3();
+        Transform GetClosestEnemy(List<Transform> allDwarfsTransform) {
+            Transform bestTarget = null;
             float closestDistanceSqr = Mathf.Infinity;
             Vector3 currentPosition = enemyObj.transform.position;
-            foreach (Vector3 potentialTarget in allDwarfes) {
-                Vector3 directionToTarget = potentialTarget - currentPosition;
+            foreach (Transform potentialTarget in allDwarfsTransform) {
+                Vector3 directionToTarget = potentialTarget.position - currentPosition;
                 float dSqrToTarget = directionToTarget.sqrMagnitude;
                 if (dSqrToTarget < closestDistanceSqr) {
                     closestDistanceSqr = dSqrToTarget;
                     bestTarget = potentialTarget;
                 }
             }
+
             return bestTarget;
         }
-        float distanceToDwarfs = (base.enemyObj.position - GetClosestEnemy(dwarfVector3)).magnitude;
+        float distanceToDwarfs = (base.enemyObj.transform.position - GetClosestEnemy(dwarfTransform).position).magnitude;
 
         switch (goblinState) {
             case enemyStates.Idle:
-                Debug.Log(distanceToDwarfs);
-                goblinState = enemyStates.Idle;
 
-                if (distanceToDwarfs < 80) {
+                goblinState = enemyStates.Idle;
+                
+                if (distanceToDwarfs < 10) {
                     goblinState = enemyStates.Attack;
                 }
                 if (distanceToTreasure < 15) {
                     goblinState = enemyStates.moveTowardsChest;
                 }
-                if (restTimer > 4) {
-                    goblinState = enemyStates.Patrol;
-                }
+                //if (restTimer > 1) {
+                //    goblinState = enemyStates.Patrol;
+                //}
 
                 break;
 
@@ -59,29 +60,28 @@ public class Goblin : EnemyAI {
 
                 goblinState = enemyStates.Patrol;
 
-                if (restTimer > 8) {
-                    goblinState = enemyStates.Idle;
-                    restTimer = 0;
-                }
-                if (distanceToTreasure < 15) {
+                //if (restTimer > 2) {
+                //    goblinState = enemyStates.Idle;
+                //    restTimer = 0;
+                //}
+                if (distanceToTreasure < 1) {
                     goblinState = enemyStates.moveTowardsChest;
                 }
                 break;
 
             case enemyStates.Attack:
-                if (distance >= 5) {
-                    goblinState = enemyStates.Patrol;
-                }
+                //if (distance >= 50) {
+                //    goblinState = enemyStates.Idle;
+                //}
                 //if (distanceToTreasure > distance) {
                 //    goblinState = enemyStates.moveTowardsChest;
                 //}
                 break;
 
-            case enemyStates.moveTowardsChest:
 
-                if (distance < 2) {
-                    goblinState = enemyStates.Attack;
-                }
+                //if (distance < 2) {
+                //    goblinState = enemyStates.Attack;
+                //}
                 if (distanceToTreasure < 1.5) {
                     goblinState = enemyStates.Steal;
                 }
@@ -105,7 +105,7 @@ public class Goblin : EnemyAI {
                 break;
 
         }
-        UpdateState(playerObj, treasureChest, goblinState, dwarfVector3);
+        UpdateState(playerObj, treasureChest, goblinState, dwarfTransform);
     }
 
 }
