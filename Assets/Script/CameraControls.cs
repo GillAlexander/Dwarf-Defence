@@ -44,22 +44,22 @@ public class CameraControls : MonoBehaviour {
             transform.position += Vector3.ProjectOnPlane(Camera.main.transform.right, Vector3.up) * movementSpeed * Time.deltaTime;
         }
         if (Input.GetKey(KeyCode.Q)) {
-            transform.position -= transform.up * movementSpeed;
+            transform.position -= transform.up * 0.15f;
         }
             
         if (Input.GetKey(KeyCode.E)) {
-            transform.position += transform.up * movementSpeed;
+            transform.position += transform.up * 0.15f;
         }
 
-        if (Input.mousePosition.x >= Screen.width - screenBoarderThickness) {
-            targetRotationY++;
-            targetRotation = Quaternion.Euler(targetRotationX, targetRotationY, 0.0f);
-        }
+        //if (Input.mousePosition.x >= Screen.width - screenBoarderThickness) {
+        //    targetRotationY++;
+        //    targetRotation = Quaternion.Euler(targetRotationX, targetRotationY, 0.0f);
+        //}
 
-        if (Input.mousePosition.x <= screenBoarderThickness) {
-            targetRotationY--;
-            targetRotation = Quaternion.Euler(targetRotationX, targetRotationY, 0.0f);
-        }
+        //if (Input.mousePosition.x <= screenBoarderThickness) {
+        //    targetRotationY--;
+        //    targetRotation = Quaternion.Euler(targetRotationX, targetRotationY, 0.0f);
+        //}
         if (Input.GetKeyDown(KeyCode.LeftShift)) {
             movementSpeed *= 2;
         }

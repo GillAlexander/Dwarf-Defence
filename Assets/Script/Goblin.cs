@@ -15,16 +15,35 @@ public class Goblin : EnemyAI {
     }
     bool gold = false;
     float restTimer;
-    public override void UpdateEnemy(Transform playerObj, Transform treasureChest) {
+    public override void UpdateEnemy(Transform playerObj, Transform treasureChest, List<Vector3> dwarfVector3) {
         float distance = (base.enemyObj.position - playerObj.position).magnitude;
         float distanceToTreasure = (base.enemyObj.position - treasureChest.position).magnitude;
+        
         restTimer += Time.deltaTime;
+
+
+        Vector3 GetClosestEnemy(List<Vector3> allDwarfes) {
+            Vector3 bestTarget = new Vector3();
+            float closestDistanceSqr = Mathf.Infinity;
+            Vector3 currentPosition = enemyObj.transform.position;
+            foreach (Vector3 potentialTarget in allDwarfes) {
+                Vector3 directionToTarget = potentialTarget - currentPosition;
+                float dSqrToTarget = directionToTarget.sqrMagnitude;
+                if (dSqrToTarget < closestDistanceSqr) {
+                    closestDistanceSqr = dSqrToTarget;
+                    bestTarget = potentialTarget;
+                }
+            }
+            return bestTarget;
+        }
+        float distanceToDwarfs = (base.enemyObj.position - GetClosestEnemy(dwarfVector3)).magnitude;
 
         switch (goblinState) {
             case enemyStates.Idle:
-
+                Debug.Log(distanceToDwarfs);
                 goblinState = enemyStates.Idle;
-                if (distance < 5) {
+
+                if (distanceToDwarfs < 80) {
                     goblinState = enemyStates.Attack;
                 }
                 if (distanceToTreasure < 15) {
@@ -86,7 +105,7 @@ public class Goblin : EnemyAI {
                 break;
 
         }
-        UpdateState(playerObj, treasureChest, goblinState);
+        UpdateState(playerObj, treasureChest, goblinState, dwarfVector3);
     }
 
 }
