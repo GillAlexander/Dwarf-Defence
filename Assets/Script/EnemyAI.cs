@@ -8,6 +8,7 @@ public class EnemyAI : baseUnit {
     protected Transform enemyObj;
 
     NavMeshAgent agent;
+    
 
     void start() {
         //agent = new Component<NavMeshAgent>; GetComponent<NavMeshAgent>();
@@ -16,7 +17,8 @@ public class EnemyAI : baseUnit {
     protected enum enemyStates {
         Idle,
         Patrol,
-        Attack,
+        ChargeToAttack,
+        DoAttack,
         moveTowardsChest,
         Steal,
         Flee
@@ -50,7 +52,9 @@ public class EnemyAI : baseUnit {
             return bestTarget;
         }
 
+        float distanceToDwarfs = (enemyObj.transform.position - GetClosestEnemy(dwarfTransform).position).magnitude;
 
+        //StateMachine that makes sure the AI cant have several faces at once
         switch (enemyState) {
             case enemyStates.Idle:
                 
@@ -58,18 +62,23 @@ public class EnemyAI : baseUnit {
 
             case enemyStates.Patrol:
                 //Move randomly between random points 
-                Vector3 randomPosition = new Vector3(Random.Range(0, 360), 0f, Random.Range(0, 360));
+                Vector3 randomPosition = new Vector3(Random.Range(0, 5), 0f, Random.Range(0, 5));
                 enemyObj.rotation = Quaternion.LookRotation(enemyObj.position - randomPosition);
-
                 break;
 
-            case enemyStates.Attack:
+            case enemyStates.ChargeToAttack:
                 enemyObj.rotation = Quaternion.LookRotation(GetClosestEnemy(dwarfTransform).position - enemyObj.position);
-
                 enemyObj.Translate(enemyObj.forward * 2 * Time.deltaTime);
-                Debug.Log("Attack bitch");
+
                 //agent.Move((GetClosestEnemy(dwarfTransform).position));
                 break;
+
+            case enemyStates.DoAttack:
+                //Do damage to the nearest dwarf unit 
+                //Do damage
+
+                break;
+
                 //Memoirs Glöm inte att flytta enemyOBJ och inte getclosestenemy
             case enemyStates.moveTowardsChest:
                 //Look at the treasure
@@ -105,8 +114,6 @@ public class EnemyAI : baseUnit {
     //            bestTarget = potentialTarget;
     //        }
     //    }
-
     //    return bestTarget;
     //}
-
 }
