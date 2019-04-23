@@ -30,14 +30,15 @@ public class CameraControls : MonoBehaviour {
 
         //transform.position = Vector3.Lerp(transform.position, targetPosition, (1.0f - smoothness));
         transform.rotation = Quaternion.Lerp(transform.rotation, targetRotation, (1.0f - smoothness));
-
-        if (Input.GetKey(KeyCode.W) || Input.mousePosition.y >= Screen.height - screenBoarderThickness) {
+        //|| Input.mousePosition.y >= Screen.height - screenBoarderThickness
+        //|| Input.mousePosition.y <= screenBoarderThickness
+        if (Input.GetKey(KeyCode.W) ) {
             transform.position += Vector3.ProjectOnPlane(Camera.main.transform.forward, Vector3.up) * movementSpeed * Time.deltaTime;
         }
         if (Input.GetKey(KeyCode.A)) {
             transform.position += Vector3.ProjectOnPlane(-Camera.main.transform.right, Vector3.up) * movementSpeed * Time.deltaTime;
         }
-        if (Input.GetKey(KeyCode.S) || Input.mousePosition.y <= screenBoarderThickness) {
+        if (Input.GetKey(KeyCode.S) ) {
             transform.position += Vector3.ProjectOnPlane(-Camera.main.transform.forward, Vector3.up) *movementSpeed * Time.deltaTime;
         }
         if (Input.GetKey(KeyCode.D)) {

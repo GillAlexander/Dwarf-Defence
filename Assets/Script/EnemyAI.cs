@@ -64,13 +64,13 @@ public class EnemyAI : baseUnit {
                 break;
 
             case enemyStates.Attack:
-                //enemyObj.rotation = Quaternion.LookRotation((GetClosestEnemy(dwarfTransform)).position - enemyObj.position);
-                enemyObj.LookAt(GetClosestEnemy(dwarfTransform));
-                enemyObj.Translate((GetClosestEnemy(dwarfTransform)).forward * 2 * Time.deltaTime);
+                enemyObj.rotation = Quaternion.LookRotation(GetClosestEnemy(dwarfTransform).position - enemyObj.position);
+
+                enemyObj.Translate(enemyObj.forward * 2 * Time.deltaTime);
                 Debug.Log("Attack bitch");
                 //agent.Move((GetClosestEnemy(dwarfTransform).position));
                 break;
-
+                //Memoirs Glöm inte att flytta enemyOBJ och inte getclosestenemy
             case enemyStates.moveTowardsChest:
                 //Look at the treasure
                 enemyObj.rotation = Quaternion.LookRotation(treasureChest.position - enemyObj.position);
