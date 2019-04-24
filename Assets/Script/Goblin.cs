@@ -50,7 +50,7 @@ public class Goblin : EnemyAI {
                 if (restTimer > 3) {
                     goblinState = enemyStates.Patrol;
                 }
-                Debug.Log("Idleing");
+                Debug.Log("Goblin Idleing");
                 break;
 
             case enemyStates.Patrol:
@@ -64,7 +64,7 @@ public class Goblin : EnemyAI {
                 if (distanceToTreasure < 15) {
                     goblinState = enemyStates.moveTowardsChest;
                 }
-                Debug.Log("Patrolling");
+                Debug.Log("Goblin Patrolling");
                 break;
 
             case enemyStates.ChargeToAttack:
@@ -79,7 +79,7 @@ public class Goblin : EnemyAI {
                     goblinState = enemyStates.DoAttack;
                     
                 }
-                Debug.Log("Charge!!");
+                Debug.Log("Goblin Charge!!");
                 break;
 
             case enemyStates.DoAttack:
@@ -88,7 +88,7 @@ public class Goblin : EnemyAI {
                     goblinState = enemyStates.ChargeToAttack;
                 }
 
-                Debug.Log("STRIKE");
+                Debug.Log("Goblin STRIKE");
                 break;
 
             case enemyStates.moveTowardsChest:

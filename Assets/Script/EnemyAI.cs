@@ -33,7 +33,6 @@ public class EnemyAI : baseUnit {
     protected void UpdateState(Transform playerObj, Transform treasureChest, enemyStates enemyState, List<Transform> dwarfTransform) {
         float fleeSpeed = 2.5f;
         float strollSpeed = 2f;
-        float attackSpeed = 5f;
 
 
         Transform GetClosestEnemy(List<Transform> allDwarfsTransform) {

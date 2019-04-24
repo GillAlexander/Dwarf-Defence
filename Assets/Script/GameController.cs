@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
     public class GameController : MonoBehaviour {
         public GameObject playerObj;
@@ -10,19 +11,23 @@ using UnityEngine;
         public GameObject goblin;
         public GameObject troll;
         public GameObject dwarf;
-
+        
         //A list that will hold all enemies
         List<EnemyAI> enemies = new List<EnemyAI>();
         List<FriendlyUnitAI> friendlies = new List<FriendlyUnitAI>();
+        public List<NavMeshAgent> dwarfAgent;
         public List<Transform> dwarfTransform = new List<Transform>();
 
         void Start() {
+            dwarfAgent = new List<NavMeshAgent>();
+
             //Add the enemies we have
-            //enemies.Add(new Creeper(creeperObj.transform));
-            //enemies.Add(new Skeleton(skeletonObj.transform));
             enemies.Add(new Goblin(goblin.transform));
             enemies.Add(new Troll(troll.transform));
-            friendlies.Add(new DwarfUnit(dwarf.transform));
+            
+            for (int i = 0; i < dwarfTransform.Count; i++) {
+                friendlies.Add(new DwarfUnit(dwarfTransform[i]));
+            }
         }
 
 
@@ -32,7 +37,7 @@ using UnityEngine;
                 enemies[i].UpdateEnemy(playerObj.transform, treasureChest.transform, dwarfTransform);
             }
             for (int i = 0; i < friendlies.Count; i++) {
-                friendlies[i].UpdateFriendlyTroops(treasureChest.transform);
+                friendlies[i].UpdateFriendlyTroops(treasureChest.transform, dwarfAgent[i]);
             }
         }
     }
