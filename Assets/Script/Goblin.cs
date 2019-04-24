@@ -2,35 +2,42 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Goblin : EnemyAI {
+public class Goblin : EnemyAI
+{
     enemyStates goblinState = enemyStates.Idle;
 
 
-    public Goblin(Transform goblinObj) {
+    public Goblin(Transform goblinObj)
+    {
         base.enemyObj = goblinObj;
     }
 
-    void Start() {
+    void Start()
+    {
         health = 100;
     }
     bool gold = false;
     float restTimer;
     float attackTimer;
-    public override void UpdateEnemy(Transform playerObj, Transform treasureChest, List<Transform> dwarfTransform) {
+    public override void UpdateEnemy(Transform playerObj, Transform treasureChest, List<Transform> dwarfTransform)
+    {
         float distance = (base.enemyObj.position - playerObj.position).magnitude;
         float distanceToTreasure = (base.enemyObj.position - treasureChest.position).magnitude;
 
         restTimer += Time.deltaTime;
         attackTimer += Time.deltaTime;
 
-        Transform GetClosestEnemy(List<Transform> allDwarfsTransform) {
+        Transform GetClosestEnemy(List<Transform> allDwarfsTransform)
+        {
             Transform bestTarget = null;
             float closestDistanceSqr = Mathf.Infinity;
             Vector3 currentPosition = enemyObj.transform.position;
-            foreach (Transform potentialTarget in allDwarfsTransform) {
+            foreach (Transform potentialTarget in allDwarfsTransform)
+            {
                 Vector3 directionToTarget = potentialTarget.position - currentPosition;
                 float dSqrToTarget = directionToTarget.sqrMagnitude;
-                if (dSqrToTarget < closestDistanceSqr) {
+                if (dSqrToTarget < closestDistanceSqr)
+                {
                     closestDistanceSqr = dSqrToTarget;
                     bestTarget = potentialTarget;
                 }
@@ -39,69 +46,82 @@ public class Goblin : EnemyAI {
         }
         float distanceToDwarfs = (base.enemyObj.transform.position - GetClosestEnemy(dwarfTransform).position).magnitude;
 
-        switch (goblinState) {
+        switch (goblinState)
+        {
             case enemyStates.Idle:
-                if (distanceToDwarfs < 10) {
+                if (distanceToDwarfs < 10)
+                {
                     goblinState = enemyStates.ChargeToAttack;
                 }
-                if (distanceToTreasure < 15) {
+                if (distanceToTreasure < 15)
+                {
                     goblinState = enemyStates.moveTowardsChest;
                 }
-                if (restTimer > 3) {
+                if (restTimer > 3)
+                {
                     goblinState = enemyStates.Patrol;
                 }
-                Debug.Log("Goblin Idleing");
+
                 break;
 
             case enemyStates.Patrol:
-                if (restTimer > 6) {
+                if (restTimer > 6)
+                {
                     goblinState = enemyStates.Idle;
                     restTimer = 0;
                 }
-                if (distanceToDwarfs < 10) {
+                if (distanceToDwarfs < 10)
+                {
                     goblinState = enemyStates.ChargeToAttack;
                 }
-                if (distanceToTreasure < 15) {
+                if (distanceToTreasure < 15)
+                {
                     goblinState = enemyStates.moveTowardsChest;
                 }
-                Debug.Log("Goblin Patrolling");
                 break;
 
             case enemyStates.ChargeToAttack:
-                if (distanceToDwarfs >= 15 && distanceToTreasure >= 15) {
+                if (distanceToDwarfs >= 15 && distanceToTreasure >= 15)
+                {
                     goblinState = enemyStates.Idle;
                 }
-                if (distanceToTreasure < 1.5) {
+                if (distanceToTreasure < 1.5)
+                {
                     goblinState = enemyStates.Steal;
                 }
-                if (distanceToDwarfs < 1) {
+                if (distanceToDwarfs < 1)
+                {
                     attackTimer = 0;
                     goblinState = enemyStates.DoAttack;
-                    
+
                 }
-                Debug.Log("Goblin Charge!!");
+                
                 break;
 
             case enemyStates.DoAttack:
                 //Do the attack
-                if (attackTimer > 0.5) {
+                if (attackTimer > 0.5)
+                {
                     goblinState = enemyStates.ChargeToAttack;
                 }
 
-                Debug.Log("Goblin STRIKE");
+                
                 break;
 
             case enemyStates.moveTowardsChest:
-                if (distanceToDwarfs < 6) {
+                if (distanceToDwarfs < 6)
+                {
                     goblinState = enemyStates.ChargeToAttack;
                 }
-                if (distanceToTreasure < 1.5) {
+                if (distanceToTreasure < 1.5)
+                {
                     goblinState = enemyStates.Steal;
                 }
                 break;
 
             case enemyStates.Steal:
-                if (carryGold == true) {
+                if (carryGold == true)
+                {
                     goblinState = enemyStates.Flee;
                 }
                 break;

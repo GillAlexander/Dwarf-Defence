@@ -1,7 +1,8 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class CameraControls : MonoBehaviour {
+public class CameraControls : MonoBehaviour
+{
     public float movementSpeed = 0.1f;
     public float rotationSpeed = 4f;
     public float smoothness = 0.85f;
@@ -12,14 +13,17 @@ public class CameraControls : MonoBehaviour {
     float targetRotationX;
     //float floatY = 1;
 
-    void Start() {
+    void Start()
+    {
         targetRotation = transform.rotation;
         targetRotationY = transform.localRotation.eulerAngles.y;
         targetRotationX = transform.localRotation.eulerAngles.x;
     }
 
-    void Update() {
-        if (Input.GetMouseButton(2)) {
+    void Update()
+    {
+        if (Input.GetMouseButton(2))
+        {
             Cursor.visible = false;
             targetRotationY += Input.GetAxis("Mouse X") * rotationSpeed;
             targetRotationX -= Input.GetAxis("Mouse Y") * rotationSpeed;
@@ -32,23 +36,29 @@ public class CameraControls : MonoBehaviour {
         transform.rotation = Quaternion.Lerp(transform.rotation, targetRotation, (1.0f - smoothness));
         //|| Input.mousePosition.y >= Screen.height - screenBoarderThickness
         //|| Input.mousePosition.y <= screenBoarderThickness
-        if (Input.GetKey(KeyCode.W) ) {
+        if (Input.GetKey(KeyCode.W))
+        {
             transform.position += Vector3.ProjectOnPlane(Camera.main.transform.forward, Vector3.up) * movementSpeed * Time.deltaTime;
         }
-        if (Input.GetKey(KeyCode.A)) {
+        if (Input.GetKey(KeyCode.A))
+        {
             transform.position += Vector3.ProjectOnPlane(-Camera.main.transform.right, Vector3.up) * movementSpeed * Time.deltaTime;
         }
-        if (Input.GetKey(KeyCode.S) ) {
-            transform.position += Vector3.ProjectOnPlane(-Camera.main.transform.forward, Vector3.up) *movementSpeed * Time.deltaTime;
+        if (Input.GetKey(KeyCode.S))
+        {
+            transform.position += Vector3.ProjectOnPlane(-Camera.main.transform.forward, Vector3.up) * movementSpeed * Time.deltaTime;
         }
-        if (Input.GetKey(KeyCode.D)) {
+        if (Input.GetKey(KeyCode.D))
+        {
             transform.position += Vector3.ProjectOnPlane(Camera.main.transform.right, Vector3.up) * movementSpeed * Time.deltaTime;
         }
-        if (Input.GetKey(KeyCode.Q)) {
+        if (Input.GetKey(KeyCode.Q))
+        {
             transform.position -= transform.up * 0.15f;
         }
-            
-        if (Input.GetKey(KeyCode.E)) {
+
+        if (Input.GetKey(KeyCode.E))
+        {
             transform.position += transform.up * 0.15f;
         }
 
@@ -61,10 +71,12 @@ public class CameraControls : MonoBehaviour {
         //    targetRotationY--;
         //    targetRotation = Quaternion.Euler(targetRotationX, targetRotationY, 0.0f);
         //}
-        if (Input.GetKeyDown(KeyCode.LeftShift)) {
+        if (Input.GetKeyDown(KeyCode.LeftShift))
+        {
             movementSpeed *= 2;
         }
-        if (Input.GetKeyUp(KeyCode.LeftShift)) {
+        if (Input.GetKeyUp(KeyCode.LeftShift))
+        {
             movementSpeed /= 2;
         }
 

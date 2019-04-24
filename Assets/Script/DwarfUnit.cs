@@ -3,36 +3,59 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class DwarfUnit : FriendlyUnitAI {
+public class DwarfUnit : FriendlyUnitAI
+{
     friendlyUnitStates dwarfState = friendlyUnitStates.DefenceMode;
 
-    public DwarfUnit(Transform dwarfObj) {
+    public DwarfUnit(Transform dwarfObj)
+    {
         base.allyObj = dwarfObj;
     }
-    void Start() {
-        health = 150;
+
+
+    public friendlyUnitStates GetMyState()
+    {
+        return dwarfState;
     }
 
-    public override void UpdateFriendlyTroops(Transform treasureChest, NavMeshAgent dwarfAgent) {
+    void Start()
+    {
+        health = 150;
+    }
+    int unitCommand = 0;
+    public override void UpdateFriendlyTroops(Transform treasureChest, NavMeshAgent dwarfAgent)
+    {
 
         float distanceToTreasureChest = (allyObj.transform.position - treasureChest.transform.position).magnitude;
 
-        switch (dwarfState) {
+        switch (dwarfState)
+        {
             case friendlyUnitStates.FollowMode:
-                if (Input.GetKeyDown(KeyCode.G)) {
-                    dwarfState = friendlyUnitStates.DefenceMode;
-                    Debug.Log("Defence order!");
+                if (Input.GetKeyDown(KeyCode.G))
+                {
+                    unitCommand--;
                 }
-                if (distanceToTreasureChest < 5) {
+                if (distanceToTreasureChest < 5)
+                {
+                    dwarfState = friendlyUnitStates.DefenceMode;
+                }
+                if (unitCommand == 0)
+                {
                     dwarfState = friendlyUnitStates.DefenceMode;
                 }
                 break;
+
             case friendlyUnitStates.DefenceMode:
-                if (Input.GetKeyDown(KeyCode.F)) {
-                    Debug.Log("Follow order!");
+                if (Input.GetKeyDown(KeyCode.F))
+                {
+                    unitCommand++;
+                }
+                if (unitCommand == 1)
+                {
                     dwarfState = friendlyUnitStates.FollowMode;
                 }
                 break;
+
             default:
                 break;
         }
