@@ -12,7 +12,7 @@ public class Dwarf : MonoBehaviour
 
     void Start()
     {
-
+        
     }
 
     public dwarfStates GetMyState()
@@ -27,7 +27,21 @@ public class Dwarf : MonoBehaviour
         DefenceMode
     }
 
-    void UpdateState(NavMeshAgent dwarfAgent,Transform treasureChest )
+    public void ApplyDamage(int damage) {
+        
+        health -= damage;
+        
+
+        if (health <= 0) {
+            Dead();
+        }
+    }
+
+    private void Dead() {
+        gameObject.SetActive(false); 
+    }
+
+    public void UpdateState(NavMeshAgent dwarfAgent,Transform treasureChest )
     {
         switch (currentDwarfState)
         {
@@ -58,5 +72,17 @@ public class Dwarf : MonoBehaviour
     {
         UpdateState(dwarfAgent, treasureChest);
         Debug.Log(currentDwarfState);
+
+        if (health == 75) {
+            GetComponent<Renderer>().material.color = Color.red;
+        }
+        else if (health == 50) {
+
+            GetComponent<Renderer>().material.color = Color.yellow;
+        }
+        else if (health == 25) {
+
+            GetComponent<Renderer>().material.color = Color.green;
+        }
     }
 }

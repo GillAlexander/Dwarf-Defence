@@ -1,132 +1,175 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
-public class Troll : EnemyAI
+public class Troll : MonoBehaviour
 {
-    enemyStates trollState = enemyStates.Idle;
+    public float health;
+    byte carryGold;
+    
+    public NavMeshAgent trollAgent;
 
-    public Troll(Transform trollObj)
-    {
-        base.enemyObj = trollObj;
+    void Start() {
+
     }
-    void Start()
-    {
-        health = 250;
+
+    public Trollstates GetMyState() {
+        return currentTrollState;
     }
+
+    Trollstates currentTrollState = Trollstates.ChargeToAttack;
+    public enum Trollstates {
+        Idle,
+        Patrol,
+        ChargeToAttack,
+        DoAttack,
+        moveTowardsChest,
+        Steal,
+        Flee
+    }
+
     float restTimer;
     float attackTimer;
-    public override void UpdateEnemy(Transform playerObj, Transform treasureChest, List<Transform> dwarfTransform)
-    {
-        float distance = (base.enemyObj.position - playerObj.position).magnitude;
-        float distanceToTreasure = (base.enemyObj.position - treasureChest.position).magnitude;
+
+
+    public int Damage = 5;
+    public float Distance;
+    public float WeaponRange = 1.5F;
+
+    public float attackDelay = 1f; //seconds
+    private float lastAttackAt = -999f;
+
+    void Attack(Dwarf target) {
+        if (Time.time > lastAttackAt + attackDelay) {
+            lastAttackAt = Time.time;
+            target.ApplyDamage(Damage);
+        }
+    }
+
+    public void UpdateState(Transform treasureChest, List<Transform> dwarfTransform) {
+        
+
+        RaycastHit hit;
+        Debug.DrawLine(transform.position, transform.TransformDirection(Vector3.forward), Color.blue);
+        if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out hit))
+        {
+            Debug.DrawLine(transform.position, transform.TransformDirection(Vector3.forward), Color.blue);
+            Distance = hit.distance;
+            if (Distance < WeaponRange)
+            {
+                Debug.DrawLine(transform.position, transform.TransformDirection(Vector3.forward), Color.blue);
+                Dwarf dwarf = hit.transform.GetComponent<Dwarf>();
+                if (dwarf != null) Attack(dwarf);
+            }
+        }
+        
 
         restTimer += Time.deltaTime;
         attackTimer += Time.deltaTime;
 
-        Transform GetClosestEnemy(List<Transform> allDwarfsTransform)
-        {
-            Transform bestTarget = null;
-            float closestDistanceSqr = Mathf.Infinity;
-            Vector3 currentPosition = enemyObj.transform.position;
-            foreach (Transform potentialTarget in allDwarfsTransform)
-            {
-                Vector3 directionToTarget = potentialTarget.position - currentPosition;
-                float dSqrToTarget = directionToTarget.sqrMagnitude;
-                if (dSqrToTarget < closestDistanceSqr)
-                {
-                    closestDistanceSqr = dSqrToTarget;
-                    bestTarget = potentialTarget;
-                }
-            }
-            return bestTarget;
-        }
-        float distanceToDwarfs = (base.enemyObj.transform.position - GetClosestEnemy(dwarfTransform).position).magnitude;
+        float distanceToDwarfs = (transform.position - GetClosestEnemy(dwarfTransform).position).magnitude;
+        float distanceToTreasure = (transform.position - treasureChest.position).magnitude;
+        switch (currentTrollState) {
 
-        switch (trollState)
-        {
-            case enemyStates.Idle:
-                if (distanceToDwarfs < 10)
-                {
-                    trollState = enemyStates.ChargeToAttack;
+            case Trollstates.Idle:
+                if (distanceToDwarfs < 10) {
+                    currentTrollState = Trollstates.ChargeToAttack;
                 }
-                if (distanceToTreasure < 15)
-                {
-                    trollState = enemyStates.moveTowardsChest;
+                if (distanceToTreasure < 15) {
+                    currentTrollState = Trollstates.moveTowardsChest;
                 }
-                if (restTimer > 3)
-                {
-                    trollState = enemyStates.Patrol;
+                if (restTimer > 3) {
+                    currentTrollState = Trollstates.Patrol;
                 }
+                Debug.Log("IDLE TROLL");
                 break;
 
-            case enemyStates.Patrol:
-                if (restTimer > 6)
-                {
-                    trollState = enemyStates.Idle;
+            case Trollstates.Patrol:
+                //Move randomly between random points 
+                //CODE here
+
+                if (restTimer > 6) {
+                    currentTrollState = Trollstates.Idle;
                     restTimer = 0;
                 }
-                if (distanceToDwarfs < 10)
-                {
-                    trollState = enemyStates.ChargeToAttack;
+                if (distanceToDwarfs < 10) {
+                    currentTrollState = Trollstates.ChargeToAttack;
                 }
-                if (distanceToTreasure < 15)
-                {
-                    trollState = enemyStates.moveTowardsChest;
+                if (distanceToTreasure < 15) {
+                    currentTrollState = Trollstates.moveTowardsChest;
                 }
+                Debug.Log("PATROL TROLL");
                 break;
 
-            case enemyStates.ChargeToAttack:
-                if (distanceToDwarfs >= 15 && distanceToTreasure >= 15)
-                {
-                    trollState = enemyStates.Idle;
+            case Trollstates.ChargeToAttack:
+                if (distanceToDwarfs >= 15 || distanceToTreasure >= 15) {
+                    currentTrollState = Trollstates.Idle;
                 }
-                if (distanceToTreasure < 1.5)
-                {
-                    trollState = enemyStates.Steal;
+                if (distanceToTreasure < 1.5) {
+                    currentTrollState = Trollstates.Steal;
                 }
-                if (distanceToDwarfs < 1)
-                {
+                if (distanceToDwarfs < 10) {
+                    trollAgent.SetDestination((GetClosestEnemy(dwarfTransform).position));
+                    Debug.Log("CHARGE TROLL");
+                }
+                if (distanceToDwarfs < 1.5f) {
                     attackTimer = 0;
-                    trollState = enemyStates.DoAttack;
+                    currentTrollState = Trollstates.DoAttack;
+                }
+
+                break;
+
+            case Trollstates.DoAttack:
+                //Do damage to the nearest dwarf unit 
+
+                if (attackTimer > 0.3) {
+                    Debug.Log("I DID AN ATTACK");
+                    currentTrollState = Trollstates.ChargeToAttack;
 
                 }
                 break;
 
-            case enemyStates.DoAttack:
-                //Do the attack
-                if (attackTimer > 0.5)
-                {
-                    trollState = enemyStates.ChargeToAttack;
+            //Memoirs Glöm inte att flytta enemyOBJ och inte getclosestenemy
+            case Trollstates.moveTowardsChest:
+                //Look at the treasure
+                if (distanceToDwarfs < 6) {
+                    currentTrollState = Trollstates.ChargeToAttack;
                 }
+                if (distanceToTreasure < 1.5) {
+                    currentTrollState = Trollstates.Steal;
+                }
+                trollAgent.Move(treasureChest.position);
+                trollAgent.updateRotation = true;
                 break;
 
-            case enemyStates.moveTowardsChest:
-                if (distance < 6)
-                {
-                    trollState = enemyStates.ChargeToAttack;
-                }
-                if (distanceToTreasure < 1.5)
-                {
-                    trollState = enemyStates.Steal;
-                }
+            case Trollstates.Steal:
+                carryGold = 10;
+                Debug.Log("I STOLE");
                 break;
-            case enemyStates.Steal:
-                trollState = enemyStates.Steal;
-                if (carryGold == true)
-                {
-                    trollState = enemyStates.Flee;
-                }
-                break;
-            case enemyStates.Flee:
-                if (distance < 10)
-                {
-                    trollState = enemyStates.Flee;
-                }
-                break;
-            default:
+
+            case Trollstates.Flee:
+                Debug.Log("FLEEEE");
                 break;
         }
-        UpdateState(playerObj, treasureChest, trollState, dwarfTransform);
+    }
+
+    Transform GetClosestEnemy(List<Transform> allDwarfsTransform) {
+        Transform bestTarget = null;
+        float closestDistanceSqr = Mathf.Infinity;
+        Vector3 currentPosition = this.transform.position;
+        foreach (Transform potentialTarget in allDwarfsTransform) {
+            Vector3 directionToTarget = potentialTarget.position - currentPosition;
+            float dSqrToTarget = directionToTarget.sqrMagnitude;
+            if (dSqrToTarget < closestDistanceSqr) {
+                closestDistanceSqr = dSqrToTarget;
+                bestTarget = potentialTarget;
+            }
+        }
+        return bestTarget;
+    }
+    void Update()
+    {
+
     }
 }

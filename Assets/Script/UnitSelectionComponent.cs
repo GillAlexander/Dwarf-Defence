@@ -6,68 +6,51 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Text;
 
-public class UnitSelectionComponent : MonoBehaviour
-{
+public class UnitSelectionComponent : MonoBehaviour {
     bool isSelecting = false;
     Vector3 mousePosition1;
     //public NavMeshAgent[] agents;
     public GameObject selectionCirclePrefab;
     public List<NavMeshAgent> agents;
 
-    void Start()
-    {
+    void Start() {
 
     }
     public List<SelectableUnitComponent> selectedObjects;
 
-    void Update()
-    {
+    void Update() {
         // If we press the left mouse button, begin selection and remember the location of the mouse
-        if (Input.GetMouseButtonDown(0))
-        {
+        if (Input.GetMouseButtonDown(0)) {
             isSelecting = true;
             mousePosition1 = Input.mousePosition;
 
-            foreach (var selectableObject in FindObjectsOfType<SelectableUnitComponent>())
-            {
-                if (selectableObject.selectionCircle != null)
-                {
+            foreach (var selectableObject in FindObjectsOfType<SelectableUnitComponent>()) {
+                if (selectableObject.selectionCircle != null) {
                     Destroy(selectableObject.selectionCircle.gameObject);
                     selectableObject.selectionCircle = null;
                 }
             }
         }
         // If we let go of the left mouse button, end selection
-        if (Input.GetMouseButtonUp(0))
-        {
+        if (Input.GetMouseButtonUp(0)) {
             selectedObjects = new List<SelectableUnitComponent>();
-            foreach (var selectableObject in FindObjectsOfType<SelectableUnitComponent>())
-            {
-                if (IsWithinSelectionBounds(selectableObject.gameObject))
-                {
+            foreach (var selectableObject in FindObjectsOfType<SelectableUnitComponent>()) {
+                if (IsWithinSelectionBounds(selectableObject.gameObject)) {
                     selectedObjects.Add(selectableObject);
 
                     //Debug.Log(selectedObjects.Count);
                 }
             }
             agents = new List<NavMeshAgent>();
-            foreach (var agent in FindObjectsOfType<NavMeshAgent>())
-            {
-                if (IsWithinSelectionBounds(agent.gameObject))
-                {
-                    //if (agent.gameObject.GetComponent<DwarfUnit>() != null)
-                    //{
-                    //    Debug.Log("had dwarf component");
-                    //}
-                    //if (agent.gameObject.GetComponent<DwarfUnit>()?.GetMyState() == FriendlyUnitAI.friendlyUnitStates.FollowMode) {
-                    //    continue;
-                    //}
-                    if (agent.GetComponent<Dwarf>()?.GetMyState() == Dwarf.dwarfStates.FollowMode)
-                    {
-
+            foreach (var agent in FindObjectsOfType<NavMeshAgent>()) {
+                if (IsWithinSelectionBounds(agent.gameObject)) {
+                    if (agent.GetComponent<TreasureChest>()?.GetMyState() == TreasureChest.treasureStates.DefenceMode) {
+                        continue;
+                    }
+                    if (agent.GetComponent<Dwarf>()?.GetMyState() == Dwarf.dwarfStates.FollowMode) {
+                        continue;
                     }
                     agents.Add(agent);
-
                 }
             }
 
@@ -81,29 +64,17 @@ public class UnitSelectionComponent : MonoBehaviour
         }
 
         // Highlight all objects within the selection box
-        if (isSelecting)
-        {
-            foreach (SelectableUnitComponent selectableObject in FindObjectsOfType<SelectableUnitComponent>())
-            {
-
-
-
-
-
-
-                if (IsWithinSelectionBounds(selectableObject.gameObject))
-                {
-                    if (selectableObject.selectionCircle == null)
-                    {
+        if (isSelecting) {
+            foreach (SelectableUnitComponent selectableObject in FindObjectsOfType<SelectableUnitComponent>()) {
+                if (IsWithinSelectionBounds(selectableObject.gameObject)) {
+                    if (selectableObject.selectionCircle == null) {
                         selectableObject.selectionCircle = Instantiate(selectionCirclePrefab);
                         selectableObject.selectionCircle.transform.SetParent(selectableObject.transform, false);
                         selectableObject.selectionCircle.transform.eulerAngles = new Vector3(90, 0, 0);
                     }
                 }
-                else
-                {
-                    if (selectableObject.selectionCircle != null)
-                    {
+                else {
+                    if (selectableObject.selectionCircle != null) {
                         Destroy(selectableObject.selectionCircle.gameObject);
                         selectableObject.selectionCircle = null;
                     }
@@ -112,8 +83,7 @@ public class UnitSelectionComponent : MonoBehaviour
         }
     }
 
-    public bool IsWithinSelectionBounds(GameObject gameObject)
-    {
+    public bool IsWithinSelectionBounds(GameObject gameObject) {
         if (!isSelecting)
             return false;
 
@@ -122,10 +92,8 @@ public class UnitSelectionComponent : MonoBehaviour
         return viewportBounds.Contains(camera.WorldToViewportPoint(gameObject.transform.position));
     }
 
-    void OnGUI()
-    {
-        if (isSelecting)
-        {
+    void OnGUI() {
+        if (isSelecting) {
             // Create a rect from both mouse positions
             var rect = GUIScript.GetScreenRect(mousePosition1, Input.mousePosition);
             GUIScript.DrawScreenRect(rect, new Color(0.8f, 0.8f, 0.95f, 0.25f));

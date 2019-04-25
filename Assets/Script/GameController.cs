@@ -5,42 +5,32 @@ using UnityEngine.AI;
 
 public class GameController : MonoBehaviour
 {
-    public GameObject playerObj;
-    public GameObject creeperObj;
-    public GameObject skeletonObj;
-    public GameObject treasureChest;
-    public GameObject goblin;
-    public GameObject troll;
-    public GameObject dwarf;
-
+    public Transform treasureChest;
+    public List<Troll> Trolls = new List<Troll>();
+    public List<Goblin> Goblins = new List<Goblin>();
     //A list that will hold all enemies
-    List<EnemyAI> enemies = new List<EnemyAI>();
-    List<FriendlyUnitAI> friendlies = new List<FriendlyUnitAI>();
-    public List<NavMeshAgent> dwarfAgent = new List<NavMeshAgent>();
+    List<Dwarf> friendlies = new List<Dwarf>();
     public List<Transform> dwarfTransform = new List<Transform>();
 
     void Start()
     {
         //Add the enemies we have
-        enemies.Add(new Goblin(goblin.transform));
-        enemies.Add(new Troll(troll.transform));
-
-        for (int i = 0; i < dwarfTransform.Count; i++)
-        {
-            friendlies.Add(new DwarfUnit(dwarfTransform[i]));
-        }
+        
     }
 
     void Update()
     {
         //Update all enemies to see if they should change state and move/attack player
-        for (int i = 0; i < enemies.Count; i++)
+        for (int i = 0; i < Trolls.Count; i++)
         {
-            enemies[i].UpdateEnemy(playerObj.transform, treasureChest.transform, dwarfTransform);
+            Trolls[i].UpdateState(treasureChest, dwarfTransform);
         }
-        for (int i = 0; i < friendlies.Count; i++)
-        {
-            friendlies[i].UpdateFriendlyTroops(treasureChest.transform, dwarfAgent[i]);
+        for (int i = 0; i < Goblins.Count; i++) {
+            Goblins[i].UpdateState(treasureChest, dwarfTransform);
+        }
+
+        for (int i = 0; i < friendlies.Count; i++) {
+
         }
     }
 }
