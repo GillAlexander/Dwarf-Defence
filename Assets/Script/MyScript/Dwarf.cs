@@ -38,13 +38,13 @@ public class Dwarf : MonoBehaviour
 
     //, List<Transform> TrollTransform, List<Transform> GoblinTransform
 
-    public void UpdateState(NavMeshAgent dwarfAgent,Transform treasureChest)
+    public void UpdateState(Transform treasureChest, List<Transform> enemyTransform)
     {
-        Transform GetClosestEnemy(List<Transform> allDwarfsTransform) {
+        Transform GetClosestEnemy(List<Transform> allEnemyTranform) {
             Transform bestTarget = null;
             float closestDistanceSqr = Mathf.Infinity;
             Vector3 currentPosition = this.transform.position;
-            foreach (Transform potentialTarget in allDwarfsTransform)
+            foreach (Transform potentialTarget in allEnemyTranform)
             {
                 Vector3 directionToTarget = potentialTarget.position - currentPosition;
                 float dSqrToTarget = directionToTarget.sqrMagnitude;
@@ -57,7 +57,7 @@ public class Dwarf : MonoBehaviour
             return bestTarget;
         }
 
-        //float? distanceToTrolls = (transform.position - GetClosestEnemy(TrollTransform).position).magnitude;
+        float? distanceToTrolls = (transform.position - GetClosestEnemy(enemyTransform).position).magnitude;
         //float? distanceToGoblins = (transform.position - GetClosestEnemy(GoblinTransform).position).magnitude;
 
         switch (currentDwarfState)
@@ -75,11 +75,17 @@ public class Dwarf : MonoBehaviour
                 {
                     currentDwarfState = dwarfStates.FollowMode;
                 }
-                //if (distanceToGoblins < 2 || distanceToTrolls < 2)
-                //{
+                Vector3 targetDir = GetClosestEnemy(enemyTransform).position - transform.position;
 
-                //}
+                Vector3 newDir = Vector3.RotateTowards(transform.forward, targetDir, 5, 0.0f);
+                
+
+                if (distanceToTrolls < 5)
+                {
+                    transform.rotation = Quaternion.LookRotation(newDir);
+                }
                 break;
+
             default:
                 break;
         }
@@ -140,9 +146,8 @@ public class Dwarf : MonoBehaviour
     }
 
     void Update() {
-        UpdateState(dwarfAgent, treasureChest);
-        //RaycastHit hit;
 
+        //RaycastHit hit;
         //if (Physics.Raycast(transform.position, transform.forward * 2, out hit))
         //{
         //    if (hit.collider)
@@ -151,6 +156,7 @@ public class Dwarf : MonoBehaviour
         //    Debug.DrawLine(transform.position, transform.forward * 2);
         //    Debug.DrawRay(transform.position, transform.forward * 2, Color.red);
         //}
+
 
         hpSlider.value = health;
         hpSlider.transform.LookAt(Camera.main.transform);

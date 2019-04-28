@@ -8,13 +8,13 @@ public class GameController : MonoBehaviour
     public Transform treasureChest;
     public List<Troll> Trolls = new List<Troll>();
     public List<Goblin> Goblins = new List<Goblin>();
+    public List<Dwarf> Dwarfs = new List<Dwarf>();
     //A list that will hold all enemies
     public List<Transform> dwarfTransform = new List<Transform>();
+    public List<Transform> trollTransform = new List<Transform>();
 
-    void Start()
-    {
+    void Start() {
         //Add the enemies we have
-        
     }
 
     void Update()
@@ -39,6 +39,10 @@ public class GameController : MonoBehaviour
         }
         for (int i = 0; i < Goblins.Count; i++) {
             Goblins[i].UpdateState(treasureChest, dwarfTransform);
+        }
+        for (int i = 0; i < Dwarfs.Count; i++)
+        {
+            Dwarfs[i].UpdateState(treasureChest, trollTransform);
         }
 
     }

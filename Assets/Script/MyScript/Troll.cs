@@ -10,7 +10,7 @@ public class Troll : MonoBehaviour {
     public Slider hpSlider;
     public float senseUnitDistance;
     public NavMeshAgent trollAgent;
-
+    public Animator trollAnimator;
     void Start() {
 
     }
@@ -67,8 +67,7 @@ public class Troll : MonoBehaviour {
             return bestTarget;
         }
 
-        restTimer += Time.deltaTime;
-        attackTimer += Time.deltaTime;
+
 
         float? distanceToDwarfs = (transform.position - GetClosestEnemy(dwarfTransform).position).magnitude;
         float distanceToTreasure = (transform.position - treasureChest.position).magnitude;
@@ -76,6 +75,9 @@ public class Troll : MonoBehaviour {
         {
 
             case Trollstates.Idle:
+                trollAnimator.SetBool("trollMove", false);
+                trollAnimator.SetBool("trollAttack", false);
+                trollAgent.isStopped = true;
                 if (distanceToDwarfs < senseUnitDistance)
                 {
                     currentTrollState = Trollstates.ChargeToAttack;
@@ -94,7 +96,7 @@ public class Troll : MonoBehaviour {
             case Trollstates.Patrol:
                 //Move randomly between random points 
                 //CODE here
-
+                trollAgent.isStopped = false;
                 if (restTimer > 6)
                 {
                     currentTrollState = Trollstates.Idle;
@@ -112,11 +114,14 @@ public class Troll : MonoBehaviour {
                 break;
 
             case Trollstates.ChargeToAttack:
+                trollAgent.isStopped = false;
+                trollAnimator.SetBool("trollMove", true);
+                trollAgent.SetDestination((GetClosestEnemy(dwarfTransform).position));
                 if (distanceToDwarfs >= 15 || distanceToTreasure >= 15)
                 {
                     currentTrollState = Trollstates.Idle;
                 }
-                if (distanceToTreasure < 1.5)
+                if (distanceToTreasure < 3)
                 {
                     currentTrollState = Trollstates.Steal;
                 }
@@ -126,14 +131,23 @@ public class Troll : MonoBehaviour {
                     Debug.Log("CHARGE TROLL");
 
                 }
-                if (distanceToDwarfs < 1.5f)
+                if (distanceToDwarfs < 4)
                 {
+
                     attackTimer = 0;
                     currentTrollState = Trollstates.DoAttack;
                 }
                 break;
 
             case Trollstates.DoAttack:
+                trollAnimator.SetBool("trollMove", false);
+                trollAnimator.SetBool("trollAttack", true);
+                if (distanceToDwarfs > 3)
+                {
+                    currentTrollState = Trollstates.ChargeToAttack;
+                }
+                currentTrollState = Trollstates.ChargeToAttack;
+
                 //Do damage to the nearest dwarf unit 
                 //Code here
                 currentTrollState = Trollstates.ChargeToAttack;
@@ -141,6 +155,7 @@ public class Troll : MonoBehaviour {
 
             //Memoirs Glöm inte att flytta enemyOBJ och inte getclosestenemy
             case Trollstates.moveTowardsChest:
+                trollAgent.isStopped = false;
                 //Look at the treasure
                 if (distanceToTreasure < 2)
                 {
@@ -154,11 +169,13 @@ public class Troll : MonoBehaviour {
                 break;
 
             case Trollstates.Steal:
+                trollAgent.isStopped = false;
                 carryGold = 10;
                 Debug.Log("I STOLE");
                 break;
 
             case Trollstates.Flee:
+                trollAgent.isStopped = false;
                 trollAgent.SetDestination(Vector3.back);
                 Debug.Log("FLEEEE");
                 break;
@@ -177,7 +194,11 @@ public class Troll : MonoBehaviour {
                 if (dwarf != null) Attack(dwarf);
             }
         }
+    }
+    private void Update() {
         
+            restTimer += Time.deltaTime;
+            attackTimer += Time.deltaTime;
     }
     public void ApplyDamage(int damage) {
         health -= damage;
@@ -189,5 +210,6 @@ public class Troll : MonoBehaviour {
     }
     private void Dead() {
         Destroy(gameObject);
+
     }
 }
