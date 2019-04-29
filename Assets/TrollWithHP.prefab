@@ -1365,9 +1365,10 @@ GameObject:
   - component: {fileID: 6396502593339298547}
   - component: {fileID: 6396502593340652955}
   - component: {fileID: 6396502593341725025}
+  - component: {fileID: 3768114190476847813}
   m_Layer: 0
   m_Name: Club
-  m_TagString: Untagged
+  m_TagString: trollWeapon
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1431,6 +1432,20 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+--- !u!64 &3768114190476847813
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6396502593339532035}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Convex: 1
+  m_CookingOptions: 14
+  m_Mesh: {fileID: 4300004, guid: c7bfa5b0a77289547960f41ce263202a, type: 3}
 --- !u!1 &6396502593339532677
 GameObject:
   m_ObjectHideFlags: 0
@@ -2399,6 +2414,7 @@ GameObject:
   - component: {fileID: 6396502593330074299}
   - component: {fileID: 4888411264095707152}
   - component: {fileID: 3912505612106824947}
+  - component: {fileID: 7263742345507685323}
   m_Layer: 0
   m_Name: TrollWithHP
   m_TagString: Untagged
@@ -2415,7 +2431,7 @@ Transform:
   m_GameObject: {fileID: 6396502593339578997}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.35, y: 0.35, z: 0.35}
+  m_LocalScale: {x: 0.28, y: 0.28, z: 0.28}
   m_Children:
   - {fileID: 6396502593339298547}
   - {fileID: 6396502593339291141}
@@ -2488,6 +2504,20 @@ MonoBehaviour:
   Distance: 1.5
   WeaponRange: 2.5
   attackDelay: 0.5
+--- !u!136 &7263742345507685323
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6396502593339578997}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 1.6375909
+  m_Height: 6.042584
+  m_Direction: 1
+  m_Center: {x: 0.01950264, y: 3.2624373, z: 0.5526857}
 --- !u!1 &6396502593339579225
 GameObject:
   m_ObjectHideFlags: 0

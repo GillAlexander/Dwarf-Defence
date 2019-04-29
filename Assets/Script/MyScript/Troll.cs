@@ -31,7 +31,6 @@ public class Troll : MonoBehaviour {
     }
 
     float restTimer;
-    float attackTimer;
 
 
     public int Damage = 5;
@@ -82,7 +81,7 @@ public class Troll : MonoBehaviour {
                 {
                     currentTrollState = Trollstates.ChargeToAttack;
                 }
-                if (distanceToTreasure < 15)
+                if (distanceToTreasure < senseUnitDistance)
                 {
                     currentTrollState = Trollstates.moveTowardsChest;
                 }
@@ -102,11 +101,11 @@ public class Troll : MonoBehaviour {
                     currentTrollState = Trollstates.Idle;
                     restTimer = 0;
                 }
-                if (distanceToDwarfs < 10)
+                if (distanceToDwarfs < senseUnitDistance)
                 {
                     currentTrollState = Trollstates.ChargeToAttack;
                 }
-                if (distanceToTreasure < 15)
+                if (distanceToTreasure < senseUnitDistance)
                 {
                     currentTrollState = Trollstates.moveTowardsChest;
                 }
@@ -117,7 +116,7 @@ public class Troll : MonoBehaviour {
                 trollAgent.isStopped = false;
                 trollAnimator.SetBool("trollMove", true);
                 trollAgent.SetDestination((GetClosestEnemy(dwarfTransform).position));
-                if (distanceToDwarfs >= 15 || distanceToTreasure >= 15)
+                if (distanceToDwarfs >= senseUnitDistance || distanceToTreasure >= senseUnitDistance)
                 {
                     currentTrollState = Trollstates.Idle;
                 }
@@ -125,16 +124,12 @@ public class Troll : MonoBehaviour {
                 {
                     currentTrollState = Trollstates.Steal;
                 }
-                if (distanceToDwarfs < 10)
+                if (distanceToDwarfs < senseUnitDistance)
                 {
                     trollAgent.SetDestination((GetClosestEnemy(dwarfTransform).position));
-                    Debug.Log("CHARGE TROLL");
-
                 }
-                if (distanceToDwarfs < 4)
+                if (distanceToDwarfs < trollAgent.stoppingDistance)
                 {
-
-                    attackTimer = 0;
                     currentTrollState = Trollstates.DoAttack;
                 }
                 break;
@@ -142,15 +137,13 @@ public class Troll : MonoBehaviour {
             case Trollstates.DoAttack:
                 trollAnimator.SetBool("trollMove", false);
                 trollAnimator.SetBool("trollAttack", true);
-                if (distanceToDwarfs > 3)
+                if (distanceToDwarfs > trollAgent.stoppingDistance)
                 {
                     currentTrollState = Trollstates.ChargeToAttack;
                 }
-                currentTrollState = Trollstates.ChargeToAttack;
 
                 //Do damage to the nearest dwarf unit 
                 //Code here
-                currentTrollState = Trollstates.ChargeToAttack;
                 break;
 
             //Memoirs Glöm inte att flytta enemyOBJ och inte getclosestenemy
@@ -198,7 +191,6 @@ public class Troll : MonoBehaviour {
     private void Update() {
         
             restTimer += Time.deltaTime;
-            attackTimer += Time.deltaTime;
     }
     public void ApplyDamage(int damage) {
         health -= damage;

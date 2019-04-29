@@ -62,10 +62,12 @@ public class DrawLineWithRayCast : MonoBehaviour
                 Debug.DrawLine(ray.origin, hit.point);
                 //log hit area to the console
                 //Debug.Log(hit.point);
-
-                Instantiate(debugBall, hit.point, transform.rotation);
-                debugBallList.Add(debugBall);
+                GameObject POINT;
+                POINT = Instantiate(debugBall, hit.point, transform.rotation);
+                Destroy(POINT, 1);
+                //debugBallList.Add(POINT);
                 positionList.Add(hit.point);
+
             }
         }
 

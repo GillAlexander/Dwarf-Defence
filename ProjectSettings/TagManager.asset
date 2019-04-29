@@ -8,6 +8,7 @@ TagManager:
   - RedBall
   - Enemy
   - Coffert
+  - trollWeapon
   layers:
   - Default
   - TransparentFX

@@ -10,7 +10,6 @@ using System.Text;
 public class UnitSelectionComponent : MonoBehaviour {
     bool isSelecting = false;
     Vector3 mousePosition1;
-    //public NavMeshAgent[] agents;
     public GameObject selectionCirclePrefab;
     public List<NavMeshAgent> agents;
 
@@ -38,8 +37,6 @@ public class UnitSelectionComponent : MonoBehaviour {
             foreach (var selectableObject in FindObjectsOfType<SelectableUnitComponent>()) {
                 if (IsWithinSelectionBounds(selectableObject.gameObject)) {
                     selectedObjects.Add(selectableObject);
-
-                    //Debug.Log(selectedObjects.Count);
                 }
             }
             agents = new List<NavMeshAgent>();
@@ -48,17 +45,12 @@ public class UnitSelectionComponent : MonoBehaviour {
                     if (agent.GetComponent<TreasureChest>()?.GetMyState() == TreasureChest.treasureStates.DefenceMode) {
                         continue;
                     }
-                    if (agent.GetComponent<Dwarf>()?.GetMyState() == Dwarf.dwarfStates.FollowMode) {
+                    if (agent.GetComponent<Dwarf>()?.GetMyState() == Dwarf.dwarfMajorStates.FollowMode) {
                         continue;
                     }
                     agents.Add(agent);
                 }
             }
-
-            var sb = new StringBuilder();
-            sb.AppendLine(string.Format("Selecting [{0}] Units", selectedObjects.Count));
-            foreach (var selectedObject in selectedObjects)
-                sb.AppendLine("-> " + selectedObject.gameObject.name);
 
             isSelecting = false;
         }
@@ -86,7 +78,6 @@ public class UnitSelectionComponent : MonoBehaviour {
     public bool IsWithinSelectionBounds(GameObject gameObject) {
         if (!isSelecting)
             return false;
-
         var camera = Camera.main;
         var viewportBounds = GUIScript.GetViewportBounds(camera, mousePosition1, Input.mousePosition);
         return viewportBounds.Contains(camera.WorldToViewportPoint(gameObject.transform.position));

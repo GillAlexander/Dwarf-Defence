@@ -10,37 +10,89 @@ public class Dwarf : MonoBehaviour
     public Transform treasureChest;
     public NavMeshAgent dwarfAgent;
     public Slider hpSlider;
-
     public int Damage = 5;
     public float Distance;
     public float WeaponRange = 1.5F;
-
     public float attackDelay = 1f; //seconds
     private float lastAttackAt = -999f;
+    dwarfStates currentDwarfState = dwarfStates.Idle;
+    dwarfMajorStates currentMajorDwarfState = dwarfMajorStates.DefenceMode;
+    private float distanceToTrolls;
+    Animator dwarfAnimator;
 
     void Start()
     {
-        
+
     }
 
-    public dwarfStates GetMyState()
+    public dwarfMajorStates GetMyState()
     {
-        return currentDwarfState;
+        return currentMajorDwarfState;
     }
-
-    dwarfStates currentDwarfState = dwarfStates.DefenceMode;
-    public enum dwarfStates
+    public enum dwarfMajorStates
     {
         FollowMode,
         DefenceMode,
     }
+    public enum dwarfStates
+    {
+        Idle,
+        Move,
+        Attack,
+        TakeDamage,
+        Die,
+    }
 
-
-    //, List<Transform> TrollTransform, List<Transform> GoblinTransform
 
     public void UpdateState(Transform treasureChest, List<Transform> enemyTransform)
     {
-        Transform GetClosestEnemy(List<Transform> allEnemyTranform) {
+        switch (currentMajorDwarfState)
+        {
+            case dwarfMajorStates.FollowMode:
+                if (Input.GetKeyDown(KeyCode.F))
+                {
+                    currentMajorDwarfState = dwarfMajorStates.DefenceMode;
+                }
+                dwarfAgent.SetDestination(treasureChest.position);
+                break;
+
+            case dwarfMajorStates.DefenceMode:
+                if (Input.GetKeyDown(KeyCode.F))
+                {
+                    currentMajorDwarfState = dwarfMajorStates.FollowMode;
+                }
+                //Rotate to n
+                Vector3 targetDir = GetClosestEnemy(enemyTransform).position - transform.position;
+                Vector3 newDir = Vector3.RotateTowards(transform.forward, targetDir, 5, 0.0f);
+                if (distanceToTrolls < 5)
+                {
+                    transform.rotation = Quaternion.LookRotation(newDir);
+                }
+
+                switch (currentDwarfState)
+                {
+                    case dwarfStates.Idle:
+
+                        break;
+                    case dwarfStates.Move:
+                        break;
+                    case dwarfStates.Attack:
+                        break;
+                    case dwarfStates.TakeDamage:
+                        break;
+                    case dwarfStates.Die:
+                        break;
+                    default:
+                        break;
+                }
+
+                break;
+
+            default:
+                break;
+        }
+        Transform GetClosestEnemy(List<Transform> allEnemyTranform)
+        {
             Transform bestTarget = null;
             float closestDistanceSqr = Mathf.Infinity;
             Vector3 currentPosition = this.transform.position;
@@ -56,41 +108,18 @@ public class Dwarf : MonoBehaviour
             }
             return bestTarget;
         }
+        distanceToTrolls = (transform.position - GetClosestEnemy(enemyTransform).position).magnitude;
 
-        float? distanceToTrolls = (transform.position - GetClosestEnemy(enemyTransform).position).magnitude;
-        //float? distanceToGoblins = (transform.position - GetClosestEnemy(GoblinTransform).position).magnitude;
-
-        switch (currentDwarfState)
-        {
-            case dwarfStates.FollowMode:
-                if (Input.GetKeyDown(KeyCode.F))
-                {
-                    currentDwarfState = dwarfStates.DefenceMode;
-                }
-                dwarfAgent.SetDestination(treasureChest.position);
-                break;
-
-            case dwarfStates.DefenceMode:
-                if (Input.GetKeyDown(KeyCode.F))
-                {
-                    currentDwarfState = dwarfStates.FollowMode;
-                }
-                Vector3 targetDir = GetClosestEnemy(enemyTransform).position - transform.position;
-
-                Vector3 newDir = Vector3.RotateTowards(transform.forward, targetDir, 5, 0.0f);
-                
-
-                if (distanceToTrolls < 5)
-                {
-                    transform.rotation = Quaternion.LookRotation(newDir);
-                }
-                break;
-
-            default:
-                break;
-        }
-
-        
+        //if (Input.GetKeyDown(KeyCode.F))
+        //{
+        //    currentDwarfState = dwarfStates.FollowMode;
+        //}
+        //Vector3 targetDir = GetClosestEnemy(enemyTransform).position - transform.position;
+        //Vector3 newDir = Vector3.RotateTowards(transform.forward, targetDir, 5, 0.0f);
+        //if (distanceToTrolls < 5)
+        //{
+        //    transform.rotation = Quaternion.LookRotation(newDir);
+        //}
         RaycastHit hit;
         if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out hit))
         {
@@ -104,19 +133,9 @@ public class Dwarf : MonoBehaviour
             }
         }
     }
-    //Buttontest
-    public void changeDwarfStateToDefence() {
-        currentDwarfState = dwarfStates.DefenceMode;
-    }
-    public void changeDwarfStateToFollow() {
-        currentDwarfState = dwarfStates.DefenceMode;
-    }
 
-    /// <summary>
-    /// Damage Code
-    /// </summary>
-    /// <param name="damage"></param>
-    public void ApplyDamage(int damage) {
+    public void ApplyDamage(int damage)
+    {
 
         health -= damage;
 
@@ -126,18 +145,27 @@ public class Dwarf : MonoBehaviour
         }
     }
 
-    private void Dead() {
+    private void Dead()
+    {
         Destroy(gameObject);
     }
-
-    void Attack(Goblin target) {
+    private void OnTriggerEnter(Collider enemyWeapon)
+    {
+        if (enemyWeapon.CompareTag("trollWeapon"))
+        {
+            ApplyDamage(10);
+        }
+    }
+    void Attack(Goblin target)
+    {
         if (Time.time > lastAttackAt + attackDelay)
         {
             lastAttackAt = Time.time;
             target.ApplyDamage(Damage);
         }
     }
-    void Attack(Troll target) {
+    void Attack(Troll target)
+    {
         if (Time.time > lastAttackAt + attackDelay)
         {
             lastAttackAt = Time.time;
@@ -145,20 +173,17 @@ public class Dwarf : MonoBehaviour
         }
     }
 
-    void Update() {
-
-        //RaycastHit hit;
-        //if (Physics.Raycast(transform.position, transform.forward * 2, out hit))
-        //{
-        //    if (hit.collider)
-        //    {
-        //    }
-        //    Debug.DrawLine(transform.position, transform.forward * 2);
-        //    Debug.DrawRay(transform.position, transform.forward * 2, Color.red);
-        //}
-
-
+    void Update()
+    {
         hpSlider.value = health;
         hpSlider.transform.LookAt(Camera.main.transform);
     }
 }
+
+////Buttontest
+//public void changeDwarfStateToDefence() {
+//    currentDwarfState = dwarfStates.DefenceMode;
+//}
+//public void changeDwarfStateToFollow() {
+//    currentDwarfState = dwarfStates.DefenceMode;
+//}
