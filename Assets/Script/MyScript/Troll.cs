@@ -89,7 +89,6 @@ public class Troll : MonoBehaviour {
                 {
                     currentTrollState = Trollstates.Patrol;
                 }
-                Debug.Log("IDLE TROLL");
                 break;
 
             case Trollstates.Patrol:
@@ -109,7 +108,6 @@ public class Troll : MonoBehaviour {
                 {
                     currentTrollState = Trollstates.moveTowardsChest;
                 }
-                Debug.Log("PATROL TROLL");
                 break;
 
             case Trollstates.ChargeToAttack:
@@ -176,16 +174,12 @@ public class Troll : MonoBehaviour {
 
         hpSlider.value = health;
         hpSlider.transform.LookAt(Camera.main.transform);
-
-        RaycastHit hit;
-        if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out hit))
+    }
+    private void OnTriggerEnter(Collider enemyWeapon) {
+        if (enemyWeapon.CompareTag("dwarfWeapon"))
         {
-            Distance = hit.distance;
-            if (Distance < WeaponRange)
-            {
-                Dwarf dwarf = hit.transform.GetComponent<Dwarf>();
-                if (dwarf != null) Attack(dwarf);
-            }
+            Debug.Log("FHAN");
+            ApplyDamage(15);
         }
     }
     private void Update() {

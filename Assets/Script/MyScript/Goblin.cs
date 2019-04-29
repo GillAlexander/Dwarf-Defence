@@ -81,7 +81,6 @@ public class Goblin : MonoBehaviour {
                 {
                     currentGoblinState = GoblinStates.Patrol;
                 }
-                Debug.Log("IDLE Goblin");
                 break;
 
             case GoblinStates.Patrol:
@@ -101,7 +100,7 @@ public class Goblin : MonoBehaviour {
                 {
                     currentGoblinState = GoblinStates.moveTowardsChest;
                 }
-                Debug.Log("PATROL Goblin");
+
                 break;
 
             case GoblinStates.ChargeToAttack:
@@ -116,7 +115,7 @@ public class Goblin : MonoBehaviour {
                 if (distanceToDwarfs < 10)
                 {
                     goblinAgent.SetDestination((GetClosestEnemy(dwarfTransform).position));
-                    Debug.Log("CHARGE Goblin");
+
                 }
                 if (distanceToDwarfs < 2f)
                 {
@@ -149,12 +148,12 @@ public class Goblin : MonoBehaviour {
 
             case GoblinStates.Steal:
                 carryGold = 10;
-                Debug.Log("I STOLEGoblin");
+
                 break;
 
             case GoblinStates.Flee:
                 goblinAgent.SetDestination(Vector3.back);
-                Debug.Log("Goblin FLEEEE");
+
                 break;
         }
 

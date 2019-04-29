@@ -9,6 +9,7 @@ TagManager:
   - Enemy
   - Coffert
   - trollWeapon
+  - dwarfWeapon
   layers:
   - Default
   - TransparentFX

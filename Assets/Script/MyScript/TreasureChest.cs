@@ -45,6 +45,5 @@ public class TreasureChest : MonoBehaviour
 
     void Update() {
         UpdateState(chestAgent);
-        Debug.Log(currentTreasureState);
     }
 }

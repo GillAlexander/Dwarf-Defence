@@ -18,7 +18,7 @@ public class Dwarf : MonoBehaviour
     dwarfStates currentDwarfState = dwarfStates.Idle;
     dwarfMajorStates currentMajorDwarfState = dwarfMajorStates.DefenceMode;
     private float distanceToTrolls;
-    Animator dwarfAnimator;
+    public Animator dwarfAnimator;
 
     void Start()
     {
@@ -46,6 +46,8 @@ public class Dwarf : MonoBehaviour
 
     public void UpdateState(Transform treasureChest, List<Transform> enemyTransform)
     {
+
+        distanceToTrolls = (transform.position - GetClosestEnemy(enemyTransform).position).magnitude;
         switch (currentMajorDwarfState)
         {
             case dwarfMajorStates.FollowMode:
@@ -66,24 +68,60 @@ public class Dwarf : MonoBehaviour
                 Vector3 newDir = Vector3.RotateTowards(transform.forward, targetDir, 5, 0.0f);
                 if (distanceToTrolls < 5)
                 {
-                    transform.rotation = Quaternion.LookRotation(newDir);
+                    Vector3 Rotate180 = new Vector3(0, 0, 180);
+                    transform.rotation = Quaternion.LookRotation(newDir- Rotate180);
                 }
-
                 switch (currentDwarfState)
                 {
                     case dwarfStates.Idle:
+                        //Neutral state 
+                        dwarfAnimator.SetBool("dwarfAttack", false);
+                        dwarfAnimator.SetBool("dwarfMove", false);
 
+                        if (dwarfAgent.velocity != Vector3.zero)
+                        {
+                            currentDwarfState = dwarfStates.Move;
+                        }
+                        if (distanceToTrolls < dwarfAgent.stoppingDistance)
+                        {
+                            currentDwarfState = dwarfStates.Attack;
+                        }
                         break;
+
                     case dwarfStates.Move:
+                        dwarfAnimator.SetBool("dwarfAttack", false);
+                        dwarfAnimator.SetBool("dwarfMove", true);
+
+                        if (distanceToTrolls < dwarfAgent.stoppingDistance)
+                        {
+                            currentDwarfState = dwarfStates.Attack;
+                        }
+                        if (dwarfAgent.velocity == Vector3.zero)
+                        {
+                            currentDwarfState = dwarfStates.Idle;
+                        }
+                        Debug.Log("DwarfMove");
                         break;
+                        //Move dwarf
                     case dwarfStates.Attack:
+                        dwarfAnimator.SetBool("dwarfAttack", true);
+                        dwarfAnimator.SetBool("dwarfMove", false);
+                        Debug.Log("DwarfAttack");
+                        if (distanceToTrolls > dwarfAgent.stoppingDistance)
+                        {
+                            currentDwarfState = dwarfStates.Idle;
+                        }
                         break;
+                        
                     case dwarfStates.TakeDamage:
                         break;
+
                     case dwarfStates.Die:
                         break;
+
                     default:
                         break;
+
                 }
 
                 break;
@@ -108,7 +146,6 @@ public class Dwarf : MonoBehaviour
             }
             return bestTarget;
         }
-        distanceToTrolls = (transform.position - GetClosestEnemy(enemyTransform).position).magnitude;
 
         //if (Input.GetKeyDown(KeyCode.F))
         //{
@@ -120,18 +157,7 @@ public class Dwarf : MonoBehaviour
         //{
         //    transform.rotation = Quaternion.LookRotation(newDir);
         //}
-        RaycastHit hit;
-        if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out hit))
-        {
-            Distance = hit.distance;
-            if (Distance < WeaponRange)
-            {
-                Troll Troll = hit.transform.GetComponent<Troll>();
-                if (Troll != null) Attack(Troll);
-                Goblin Goblin = hit.transform.GetComponent<Goblin>();
-                if (Goblin != null) Attack(Goblin);
-            }
-        }
+
     }
 
     public void ApplyDamage(int damage)
