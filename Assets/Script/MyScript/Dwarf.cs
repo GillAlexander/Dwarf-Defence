@@ -51,11 +51,27 @@ public class Dwarf : MonoBehaviour
         switch (currentMajorDwarfState)
         {
             case dwarfMajorStates.FollowMode:
+                float distanceToTreasure = (transform.position - treasureChest.position).magnitude;
                 if (Input.GetKeyDown(KeyCode.F))
                 {
                     currentMajorDwarfState = dwarfMajorStates.DefenceMode;
                 }
-                dwarfAgent.SetDestination(treasureChest.position);
+                dwarfAnimator.SetBool("dwarfAttack", true);
+                dwarfAnimator.SetBool("dwarfMove", false);
+
+                if (distanceToTreasure < 5)
+                {
+                    dwarfAgent.isStopped = true;
+                    dwarfAnimator.SetBool("dwarfAttack", false);
+                    dwarfAnimator.SetBool("dwarfMove", false);
+                }
+                else
+                {
+                    dwarfAgent.isStopped = false;
+                    dwarfAgent.SetDestination(treasureChest.position);
+                    dwarfAnimator.SetBool("dwarfAttack", false);
+                    dwarfAnimator.SetBool("dwarfMove", true);
+                }
                 break;
 
             case dwarfMajorStates.DefenceMode:
@@ -64,13 +80,12 @@ public class Dwarf : MonoBehaviour
                     currentMajorDwarfState = dwarfMajorStates.FollowMode;
                 }
                 //Rotate to n
-                Vector3 targetDir = GetClosestEnemy(enemyTransform).position - transform.position;
-                Vector3 newDir = Vector3.RotateTowards(transform.forward, targetDir, 5, 0.0f);
+
                 if (distanceToTrolls < 5)
                 {
-                    Vector3 Rotate180 = new Vector3(0, 0, 180);
-                    transform.rotation = Quaternion.LookRotation(newDir- Rotate180);
+                    transform.LookAt(GetClosestEnemy(enemyTransform).position);
                 }
+
                 switch (currentDwarfState)
                 {
                     case dwarfStates.Idle:
@@ -201,6 +216,7 @@ public class Dwarf : MonoBehaviour
 
     void Update()
     {
+
         hpSlider.value = health;
         hpSlider.transform.LookAt(Camera.main.transform);
     }

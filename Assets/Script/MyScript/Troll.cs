@@ -114,6 +114,7 @@ public class Troll : MonoBehaviour {
                 trollAgent.isStopped = false;
                 trollAnimator.SetBool("trollMove", true);
                 trollAgent.SetDestination((GetClosestEnemy(dwarfTransform).position));
+                transform.LookAt(GetClosestEnemy(dwarfTransform).position);
                 if (distanceToDwarfs >= senseUnitDistance || distanceToTreasure >= senseUnitDistance)
                 {
                     currentTrollState = Trollstates.Idle;
@@ -135,6 +136,7 @@ public class Troll : MonoBehaviour {
             case Trollstates.DoAttack:
                 trollAnimator.SetBool("trollMove", false);
                 trollAnimator.SetBool("trollAttack", true);
+                transform.LookAt(GetClosestEnemy(dwarfTransform).position);
                 if (distanceToDwarfs > trollAgent.stoppingDistance)
                 {
                     currentTrollState = Trollstates.ChargeToAttack;

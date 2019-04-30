@@ -31,6 +31,13 @@ public class GameController : MonoBehaviour
             if (Goblins[i] == null)
                 Goblins.RemoveAt(i);
         }
+        for (int i = 0; i < trollTransform.Count; i++)
+        {
+            if (trollTransform[i] == null)
+            {
+                trollTransform.RemoveAt(i);
+            }
+        }
 
         //Update all enemies to see if they should change state and move/attack player
         for (int i = 0; i < Trolls.Count; i++)
