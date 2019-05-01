@@ -10,6 +10,8 @@ TagManager:
   - Coffert
   - trollWeapon
   - dwarfWeapon
+  - Troll
+  - Dwarf
   layers:
   - Default
   - TransparentFX
