@@ -81,7 +81,6 @@ public class Dwarf : MonoBehaviour
                 {
                     currentMajorDwarfState = dwarfMajorStates.FollowMode;
                 }
-                //Rotate to n
 
                 if (distanceToTrolls < 5)
                 {
@@ -117,13 +116,12 @@ public class Dwarf : MonoBehaviour
                         {
                             currentDwarfState = dwarfStates.Idle;
                         }
-                        Debug.Log("DwarfMove");
                         break;
-                        //Move dwarf
+
                     case dwarfStates.Attack:
                         dwarfAnimator.SetBool("dwarfAttack", true);
                         dwarfAnimator.SetBool("dwarfMove", false);
-                        Debug.Log("DwarfAttack");
+
                         if (distanceToTrolls > dwarfAgent.stoppingDistance)
                         {
                             currentDwarfState = dwarfStates.Idle;
@@ -140,7 +138,6 @@ public class Dwarf : MonoBehaviour
                         break;
 
                 }
-
                 break;
 
             default:
@@ -163,18 +160,6 @@ public class Dwarf : MonoBehaviour
             }
             return bestTarget;
         }
-
-        //if (Input.GetKeyDown(KeyCode.F))
-        //{
-        //    currentDwarfState = dwarfStates.FollowMode;
-        //}
-        //Vector3 targetDir = GetClosestEnemy(enemyTransform).position - transform.position;
-        //Vector3 newDir = Vector3.RotateTowards(transform.forward, targetDir, 5, 0.0f);
-        //if (distanceToTrolls < 5)
-        //{
-        //    transform.rotation = Quaternion.LookRotation(newDir);
-        //}
-
     }
 
     public void ApplyDamage(int damage)
@@ -190,6 +175,9 @@ public class Dwarf : MonoBehaviour
 
     private void Dead()
     {
+        Destroy(GetComponent<NavMeshAgent>());
+        Destroy(GetComponent<CapsuleCollider>());
+        Destroy(GetComponentInChildren<Canvas>());
         dwarfAnimator.SetBool("dwarfDie", true);
         isDead = true;
     }

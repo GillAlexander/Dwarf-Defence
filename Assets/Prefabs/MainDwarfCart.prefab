@@ -2831,7 +2831,7 @@ NavMeshAgent:
   m_Enabled: 1
   m_AgentTypeID: 0
   m_Radius: 0.5
-  m_Speed: 3
+  m_Speed: 2
   m_Acceleration: 8
   avoidancePriority: 50
   m_AngularSpeed: 120
@@ -2857,6 +2857,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gold: 750
   chestAgent: {fileID: 2780869299178489853}
+  dwarfAnimator: {fileID: 2780869298818668882}
+  valueY: 0
+  valueX: 0
+  width: 0
+  height: 0
 --- !u!136 &2780869299178489795
 CapsuleCollider:
   m_ObjectHideFlags: 0

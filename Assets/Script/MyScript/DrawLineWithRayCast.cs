@@ -21,7 +21,7 @@ public class DrawLineWithRayCast : MonoBehaviour
     {
         time += Time.deltaTime;
 
-        if (time > 0.08f)
+        if (time > 0.10f)
         {
 
             //StartCoroutine(SavePoint());

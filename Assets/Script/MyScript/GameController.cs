@@ -88,6 +88,13 @@ public class GameController : MonoBehaviour
             dwarfScriptList[i].UpdateState(treasureChest, trollTransform);
         }
     }
+    
+    private void OnGUI() {
+        //if (GUI.Button(new Rect(10, 450, 150, 100), "I am a button"))
+        //{
+        //    print(trollScriptList);
+        //}
+    }
 }
 
 //void Start() {

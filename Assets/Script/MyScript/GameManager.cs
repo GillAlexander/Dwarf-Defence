@@ -19,4 +19,5 @@ public class GameManager : MonoBehaviour
             SceneManager.LoadScene("LINE RENDERING TEST");
         }
     }
+
 }

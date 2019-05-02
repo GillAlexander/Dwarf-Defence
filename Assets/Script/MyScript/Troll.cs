@@ -122,14 +122,10 @@ public class Troll : MonoBehaviour
                 trollAnimator.SetBool("trollMove", true);
                 trollAgent.SetDestination((GetClosestEnemy(dwarfTransform).position));
                 transform.LookAt(GetClosestEnemy(dwarfTransform).position);
-                if (distanceToDwarfs >= senseUnitDistance || distanceToTreasure >= senseUnitDistance)
+                if (distanceToDwarfs >= senseUnitDistance && distanceToTreasure >= senseUnitDistance)
                 {
                     currentTrollState = Trollstates.Idle;
                 }
-                //if (distanceToTreasure < 3)
-                //{
-                //    currentTrollState = Trollstates.Steal;
-                //}
                 if (distanceToDwarfs < senseUnitDistance)
                 {
                     trollAgent.SetDestination((GetClosestEnemy(dwarfTransform).position));
@@ -148,14 +144,12 @@ public class Troll : MonoBehaviour
                 {
                     currentTrollState = Trollstates.ChargeToAttack;
                 }
-
-                //Do damage to the nearest dwarf unit 
-                //Code here
                 break;
-
-            //Memoirs Glöm inte att flytta enemyOBJ och inte getclosestenemy
+                
             case Trollstates.moveTowardsChest:
                 trollAgent.isStopped = false;
+                trollAnimator.SetBool("trollMove", true);
+                trollAnimator.SetBool("trollAttack", false);
                 //Look at the treasure
                 if (distanceToTreasure <= 0)
                 {
@@ -211,6 +205,9 @@ public class Troll : MonoBehaviour
     }
     private void Dead()
     {
+        Destroy(GetComponent<NavMeshAgent>());
+        Destroy(GetComponent<CapsuleCollider>());
+        Destroy(GetComponentInChildren<Canvas>());
         isDead = true;
         trollAnimator.SetBool("trollDie", true);
     }

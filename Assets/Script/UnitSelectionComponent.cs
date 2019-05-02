@@ -43,7 +43,6 @@ public class UnitSelectionComponent : MonoBehaviour {
             foreach (var agent in FindObjectsOfType<NavMeshAgent>()) {
                 if (IsWithinSelectionBounds(agent.gameObject)) {
                     if (agent.GetComponent<TreasureChest>()?.GetMyState() == TreasureChest.treasureStates.DefenceMode) {
-                        Debug.Log("FUCK");
                         continue;
                     }
                     if (agent.GetComponent<Dwarf>()?.GetMyState() == Dwarf.dwarfMajorStates.FollowMode) {
@@ -91,5 +90,7 @@ public class UnitSelectionComponent : MonoBehaviour {
             GUIScript.DrawScreenRect(rect, new Color(0.8f, 0.8f, 0.95f, 0.25f));
             GUIScript.DrawScreenRectBorder(rect, 2, new Color(0.8f, 0.8f, 0.95f));
         }
+
+
     }
 }

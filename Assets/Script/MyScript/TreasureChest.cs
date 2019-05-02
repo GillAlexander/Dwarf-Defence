@@ -8,8 +8,9 @@ public class TreasureChest : MonoBehaviour
     public float gold;
     public NavMeshAgent chestAgent;
     private float distanceToTrolls;
-
-
+    public Animator dwarfAnimator;
+    string descriptiveText;
+    string instructionText;
     void Start()
     {
 
@@ -26,14 +27,16 @@ public class TreasureChest : MonoBehaviour
         DefenceMode
     }
 
+    
     public void UpdateState(List<Transform> trollTransform)
     {
-
         distanceToTrolls = (transform.position - GetClosestEnemy(trollTransform).position).magnitude;
 
         switch (currentTreasureState)
         {
             case treasureStates.FollowMode:
+                descriptiveText = "You are now in FollowMode";
+                instructionText = "Controll your cart";
                 if (Input.GetKeyDown(KeyCode.F))
                 {
                     currentTreasureState = treasureStates.DefenceMode;
@@ -44,10 +47,19 @@ public class TreasureChest : MonoBehaviour
                     Debug.Log("RemovedGold");
                     removeGold(10);
                 }
+                if (chestAgent.velocity != Vector3.zero)
+                {
+                    dwarfAnimator.SetBool("dwarfMove", true);
+                }
+                else
+                {
+                    dwarfAnimator.SetBool("dwarfMove", false);
+                }
                 break;
 
             case treasureStates.DefenceMode:
-                
+                descriptiveText = "You are now in DefenceMode";
+                instructionText = "Controll your troops";
                 if (distanceToTrolls <= 4)
                 {
                     Debug.Log("RemovedGold");
@@ -57,15 +69,12 @@ public class TreasureChest : MonoBehaviour
                 {
                     currentTreasureState = treasureStates.FollowMode;
                 }
-
                 Debug.Log("DefenceMode");
                 break;
 
             default:
                 break;
         }
-
-
     }
     Transform GetClosestEnemy(List<Transform> allEnemyTranform)
     {
@@ -84,6 +93,7 @@ public class TreasureChest : MonoBehaviour
         }
         return bestTarget;
     }
+
     public void removeGold(int ammount)
     {
         gold -= ammount;
@@ -97,8 +107,16 @@ public class TreasureChest : MonoBehaviour
     {
         if (other.CompareTag("winArea"))
         {
-            Debug.Log("YOU HAVE WIN THE GAME");
+            Debug.Log("YOU HAVE WON THE GAME");
         }
+    }
+    public int valueY, valueX, width, height;
+
+    private void OnGUI() {
+
+        GUI.Box(new Rect(20, 20, 200, 40), descriptiveText);
+        GUI.Box(new Rect(20, 60, 200, 40), instructionText);
+        
     }
 
     void Update()
