@@ -72,7 +72,6 @@ public class Troll : MonoBehaviour {
         float distanceToTreasure = (transform.position - treasureChest.position).magnitude;
         switch (currentTrollState)
         {
-
             case Trollstates.Idle:
                 trollAnimator.SetBool("trollMove", false);
                 trollAnimator.SetBool("trollAttack", false);
@@ -165,11 +164,15 @@ public class Troll : MonoBehaviour {
                 trollAgent.isStopped = false;
                 carryGold = 10;
                 Debug.Log("I STOLE");
+                currentTrollState = Trollstates.Flee;
                 break;
 
             case Trollstates.Flee:
                 trollAgent.isStopped = false;
                 trollAgent.SetDestination(Vector3.back);
+                Vector3 dirToChest = transform.position - treasureChest.position;
+                Vector3 fleePos = transform.position + dirToChest;
+                trollAgent.SetDestination(fleePos);
                 Debug.Log("FLEEEE");
                 break;
         }

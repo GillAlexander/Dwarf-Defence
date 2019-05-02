@@ -43,6 +43,7 @@ public class UnitSelectionComponent : MonoBehaviour {
             foreach (var agent in FindObjectsOfType<NavMeshAgent>()) {
                 if (IsWithinSelectionBounds(agent.gameObject)) {
                     if (agent.GetComponent<TreasureChest>()?.GetMyState() == TreasureChest.treasureStates.DefenceMode) {
+                        Debug.Log("FUCK");
                         continue;
                     }
                     if (agent.GetComponent<Dwarf>()?.GetMyState() == Dwarf.dwarfMajorStates.FollowMode) {

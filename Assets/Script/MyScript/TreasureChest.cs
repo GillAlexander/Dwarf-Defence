@@ -8,6 +8,23 @@ public class TreasureChest : MonoBehaviour
     public float gold;
     public NavMeshAgent chestAgent;
 
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("Troll"))
+        {
+            removeGold(10);
+        }
+    }
+    public void removeGold(int ammount)
+    {
+
+        gold -= ammount;
+
+        if (gold <= 0)
+        {
+            Debug.Log("You lose the game");
+        }
+    }
     void Start()
     {
         
