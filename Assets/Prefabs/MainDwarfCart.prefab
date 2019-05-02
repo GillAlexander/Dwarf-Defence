@@ -2795,13 +2795,12 @@ GameObject:
   - component: {fileID: 2780869299178489852}
   - component: {fileID: 2780869299178489853}
   - component: {fileID: 6609328037288021719}
-  - component: {fileID: 2780869299178489794}
   - component: {fileID: 2780869299178489795}
   - component: {fileID: 2780869299178489792}
   - component: {fileID: 2780869299178489793}
   m_Layer: 9
   m_Name: MainDwarfCart
-  m_TagString: Dwarf
+  m_TagString: Coffert
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2832,7 +2831,7 @@ NavMeshAgent:
   m_Enabled: 1
   m_AgentTypeID: 0
   m_Radius: 0.5
-  m_Speed: 3.5
+  m_Speed: 3
   m_Acceleration: 8
   avoidancePriority: 50
   m_AngularSpeed: 120
@@ -2858,27 +2857,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gold: 750
   chestAgent: {fileID: 2780869299178489853}
---- !u!114 &2780869299178489794
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2780869299178489855}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 599d1e55c5a8d4e4b9e72e47de48f203, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  health: 100
-  treasureChest: {fileID: 0}
-  dwarfAgent: {fileID: 2780869299178489853}
-  hpSlider: {fileID: 0}
-  Damage: 5
-  Distance: 0
-  WeaponRange: 1.5
-  attackDelay: 1
-  dwarfAnimator: {fileID: 2780869298818668882}
 --- !u!136 &2780869299178489795
 CapsuleCollider:
   m_ObjectHideFlags: 0

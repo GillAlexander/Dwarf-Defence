@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 7574443624097168213}
   - component: {fileID: 27051775693347361}
   - component: {fileID: 8120311722389875566}
-  m_Layer: 5
+  m_Layer: 9
   m_Name: Fill
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -83,7 +83,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4447702005397456883}
-  m_Layer: 5
+  m_Layer: 9
   m_Name: Fill Area
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -119,7 +119,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2780869298811745952}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: beard09
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -149,7 +149,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2780869298811745954}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: beard08
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -180,7 +180,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2780869298811745956}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Red_Gnome
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -213,7 +213,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2780869298811745958}
   - component: {fileID: 2780869298818668882}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Dwarf_Prefab
   m_TagString: Unit
   m_Icon: {fileID: 0}
@@ -266,7 +266,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2780869298811745960}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Red_Gnome Head
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -300,7 +300,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2780869298811745962}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Red_gnome Footsteps
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -330,7 +330,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2780869298811745964}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Red_Gnome L Calf
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -361,7 +361,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2780869298811745966}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Red_Gnome HeadNub
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -391,7 +391,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2780869298811745968}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: axe_control
   m_TagString: dwarfWeapon
   m_Icon: {fileID: 0}
@@ -422,7 +422,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2780869298811745970}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: axe_bone
   m_TagString: dwarfWeapon
   m_Icon: {fileID: 0}
@@ -452,7 +452,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2780869298811745972}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: beard03
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -484,7 +484,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2780869298811745974}
   - component: {fileID: 7577429411005153712}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: axe_control_01
   m_TagString: dwarfWeapon
   m_Icon: {fileID: 0}
@@ -528,7 +528,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2780869298811745976}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: beard05
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -558,7 +558,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2780869298811745978}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: beard04
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -589,7 +589,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2780869298811745980}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: beard07
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -619,7 +619,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2780869298811745982}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: beard06
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -650,7 +650,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2780869298811746016}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Red_Gnome R Clavicle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -681,7 +681,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2780869298811746018}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Red_Gnome R Calf
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -712,7 +712,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2780869298811746020}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Red_Gnome R Finger01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -743,7 +743,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2780869298811746022}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Red_Gnome R Finger0
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -774,7 +774,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2780869298811746024}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Red_Gnome R Finger1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -805,7 +805,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2780869298811746026}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Red_Gnome R Finger0Nub
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -835,7 +835,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2780869298811746028}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Red_Gnome R Finger1Nub
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -865,7 +865,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2780869298811746030}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Red_Gnome R Finger11
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -897,7 +897,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2780869298811746032}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Red_Gnome L Forearm
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -929,7 +929,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2780869298811746034}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Red_Gnome L Foot
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -960,7 +960,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2780869298811746036}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Red_Gnome L Thigh
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -991,7 +991,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2780869298811746038}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Red_Gnome L Hand
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1026,7 +1026,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2780869298811746040}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Red_Gnome L Toe0Nub
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1056,7 +1056,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2780869298811746042}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Red_Gnome L Toe0
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1087,7 +1087,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2780869298811746044}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Red_Gnome Neck
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1120,7 +1120,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2780869298811746046}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Red_Gnome L UpperArm
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1151,7 +1151,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2780869298811745920}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Red_Gnome L Finger2Nub
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1182,7 +1182,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2780869298811745922}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Red_Gnome L Finger21
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1214,7 +1214,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2780869298811745924}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Red_Gnome L Finger31
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1245,7 +1245,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2780869298811745926}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Red_Gnome L Finger3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1276,7 +1276,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2780869298811745928}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Red_Gnome L Finger4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1307,7 +1307,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2780869298811745930}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Red_Gnome L Finger3Nub
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1338,7 +1338,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2780869298811745932}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Red_Gnome L Finger4Nub
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1368,7 +1368,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2780869298811745934}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Red_Gnome L Finger41
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1399,7 +1399,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2780869298811745936}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Red_Gnome L Finger0
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1430,7 +1430,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2780869298811745938}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Red_Gnome L Clavicle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1461,7 +1461,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2780869298811745940}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Red_Gnome L Finger0Nub
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1492,7 +1492,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2780869298811745942}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Red_Gnome L Finger01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1524,7 +1524,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2780869298811745944}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Red_Gnome L Finger11
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1556,7 +1556,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2780869298811745946}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Red_Gnome L Finger1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1587,7 +1587,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2780869298811745948}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Red_Gnome L Finger2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1618,7 +1618,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2780869298811745950}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Red_Gnome L Finger1Nub
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1649,7 +1649,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2780869298811746096}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Red_Gnome Spine1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1680,7 +1680,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2780869298811746098}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Red_Gnome Spine
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1713,7 +1713,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2780869298811746100}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Red_Gnome Spine3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1744,7 +1744,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2780869298811746102}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Red_Gnome Spine2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1775,7 +1775,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2780869298811746104}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Red_Gnome_Pelvis
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1807,7 +1807,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2780869298811746106}
   - component: {fileID: 2780869298814560146}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Red_Gnome_mesh
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1940,7 +1940,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2780869298811745984}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Red_Gnome R Foot
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1971,7 +1971,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2780869298811745986}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Red_Gnome R Finger4Nub
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2001,7 +2001,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2780869298811745988}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Red_Gnome R Hand
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2037,7 +2037,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2780869298811745990}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Red_Gnome R Forearm
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2068,7 +2068,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2780869298811745992}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Red_Gnome R Toe0
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2099,7 +2099,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2780869298811745994}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Red_Gnome R Thigh
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2130,7 +2130,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2780869298811745996}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Red_Gnome R UpperArm
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2161,7 +2161,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2780869298811745998}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Red_Gnome R Toe0Nub
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2191,7 +2191,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2780869298811746000}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Red_Gnome R Finger21
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2222,7 +2222,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2780869298811746002}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Red_Gnome R Finger2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2253,7 +2253,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2780869298811746004}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Red_Gnome R Finger3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2284,7 +2284,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2780869298811746006}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Red_Gnome R Finger2Nub
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2314,7 +2314,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2780869298811746008}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Red_Gnome R Finger3Nub
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2344,7 +2344,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2780869298811746010}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Red_Gnome R Finger31
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2375,7 +2375,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2780869298811746012}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Red_Gnome R Finger41
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2406,7 +2406,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2780869298811746014}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Red_Gnome R Finger4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2442,7 +2442,7 @@ GameObject:
   - component: {fileID: 2780869299178489795}
   - component: {fileID: 2780869299178489792}
   - component: {fileID: 2780869299178489793}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: MainDwarf
   m_TagString: Dwarf
   m_Icon: {fileID: 0}
@@ -2506,6 +2506,7 @@ MonoBehaviour:
   Distance: 0
   WeaponRange: 1.5
   attackDelay: 1
+  isDead: 0
   dwarfAnimator: {fileID: 2780869298818668882}
 --- !u!136 &2780869299178489795
 CapsuleCollider:
@@ -2560,7 +2561,7 @@ GameObject:
   m_Component:
   - component: {fileID: 454788308204680968}
   - component: {fileID: 3378253133746661386}
-  m_Layer: 5
+  m_Layer: 9
   m_Name: Slider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2659,7 +2660,7 @@ GameObject:
   - component: {fileID: 1958741660228924348}
   - component: {fileID: 206295631062372279}
   - component: {fileID: 5948469025277183347}
-  m_Layer: 5
+  m_Layer: 9
   m_Name: Background
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2734,7 +2735,7 @@ GameObject:
   - component: {fileID: 5258961730442166852}
   - component: {fileID: 2539641333408743801}
   - component: {fileID: 8488289456839424468}
-  m_Layer: 5
+  m_Layer: 9
   m_Name: Canvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}

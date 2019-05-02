@@ -4,23 +4,28 @@ using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.UI;
 
-public class Troll : MonoBehaviour {
+public class Troll : MonoBehaviour
+{
     public float health;
     byte carryGold;
     public Slider hpSlider;
     public float senseUnitDistance;
     public NavMeshAgent trollAgent;
     public Animator trollAnimator;
-    void Start() {
-
+    public bool isDead;
+    void Start()
+    {
+        trollAnimator.SetBool("trollDie", false);
     }
 
-    public Trollstates GetMyState() {
+    public Trollstates GetMyState()
+    {
         return currentTrollState;
     }
 
     Trollstates currentTrollState = Trollstates.Idle;
-    public enum Trollstates {
+    public enum Trollstates
+    {
         Idle,
         Patrol,
         ChargeToAttack,
@@ -40,7 +45,8 @@ public class Troll : MonoBehaviour {
     public float attackDelay = 1f; //seconds
     private float lastAttackAt = -999f;
 
-    void Attack(Dwarf target) {
+    void Attack(Dwarf target)
+    {
         if (Time.time > lastAttackAt + attackDelay)
         {
             lastAttackAt = Time.time;
@@ -48,8 +54,10 @@ public class Troll : MonoBehaviour {
         }
     }
 
-    public void UpdateState(Transform treasureChest, List<Transform> dwarfTransform) {
-        Transform GetClosestEnemy(List<Transform> allDwarfsTransform) {
+    public void UpdateState(Transform treasureChest, List<Transform> dwarfTransform)
+    {
+        Transform GetClosestEnemy(List<Transform> allDwarfsTransform)
+        {
             Transform bestTarget = null;
             float closestDistanceSqr = Mathf.Infinity;
             Vector3 currentPosition = this.transform.position;
@@ -118,10 +126,10 @@ public class Troll : MonoBehaviour {
                 {
                     currentTrollState = Trollstates.Idle;
                 }
-                if (distanceToTreasure < 3)
-                {
-                    currentTrollState = Trollstates.Steal;
-                }
+                //if (distanceToTreasure < 3)
+                //{
+                //    currentTrollState = Trollstates.Steal;
+                //}
                 if (distanceToDwarfs < senseUnitDistance)
                 {
                     trollAgent.SetDestination((GetClosestEnemy(dwarfTransform).position));
@@ -149,7 +157,7 @@ public class Troll : MonoBehaviour {
             case Trollstates.moveTowardsChest:
                 trollAgent.isStopped = false;
                 //Look at the treasure
-                if (distanceToTreasure < 2)
+                if (distanceToTreasure <= 0)
                 {
                     currentTrollState = Trollstates.Steal;
                 }
@@ -180,18 +188,20 @@ public class Troll : MonoBehaviour {
         hpSlider.value = health;
         hpSlider.transform.LookAt(Camera.main.transform);
     }
-    private void OnTriggerEnter(Collider enemyWeapon) {
+    private void OnTriggerEnter(Collider enemyWeapon)
+    {
         if (enemyWeapon.CompareTag("dwarfWeapon"))
         {
             Debug.Log("FHAN");
             ApplyDamage(15);
         }
     }
-    private void Update() {
-        
-            restTimer += Time.deltaTime;
+    private void Update()
+    {
+        restTimer += Time.deltaTime;
     }
-    public void ApplyDamage(int damage) {
+    public void ApplyDamage(int damage)
+    {
         health -= damage;
 
         if (health <= 0)
@@ -199,8 +209,9 @@ public class Troll : MonoBehaviour {
             Dead();
         }
     }
-    private void Dead() {
-        Destroy(gameObject);
-
+    private void Dead()
+    {
+        isDead = true;
+        trollAnimator.SetBool("trollDie", true);
     }
 }

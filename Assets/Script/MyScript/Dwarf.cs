@@ -15,6 +15,7 @@ public class Dwarf : MonoBehaviour
     public float WeaponRange = 1.5F;
     public float attackDelay = 1f; //seconds
     private float lastAttackAt = -999f;
+    public bool isDead;
     dwarfStates currentDwarfState = dwarfStates.Idle;
     dwarfMajorStates currentMajorDwarfState = dwarfMajorStates.DefenceMode;
     private float distanceToTrolls;
@@ -54,20 +55,21 @@ public class Dwarf : MonoBehaviour
                 float distanceToTreasure = (transform.position - treasureChest.position).magnitude;
                 if (Input.GetKeyDown(KeyCode.F))
                 {
+                    //dwarfAgent.isStopped = false;
                     currentMajorDwarfState = dwarfMajorStates.DefenceMode;
                 }
                 dwarfAnimator.SetBool("dwarfAttack", true);
                 dwarfAnimator.SetBool("dwarfMove", false);
 
-                if (distanceToTreasure < 5)
+                if (distanceToTreasure < 10)
                 {
-                    dwarfAgent.isStopped = true;
+                    //dwarfAgent.isStopped = true;
                     dwarfAnimator.SetBool("dwarfAttack", false);
                     dwarfAnimator.SetBool("dwarfMove", false);
                 }
                 else
                 {
-                    dwarfAgent.isStopped = false;
+                    //dwarfAgent.isStopped = false;
                     dwarfAgent.SetDestination(treasureChest.position);
                     dwarfAnimator.SetBool("dwarfAttack", false);
                     dwarfAnimator.SetBool("dwarfMove", true);
@@ -188,7 +190,8 @@ public class Dwarf : MonoBehaviour
 
     private void Dead()
     {
-        Destroy(gameObject);
+        dwarfAnimator.SetBool("dwarfDie", true);
+        isDead = true;
     }
     private void OnTriggerEnter(Collider enemyWeapon)
     {

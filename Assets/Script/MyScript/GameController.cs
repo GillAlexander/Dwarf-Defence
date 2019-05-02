@@ -6,6 +6,8 @@ using UnityEngine.AI;
 public class GameController : MonoBehaviour
 {
     public Transform treasureChest;
+    public TreasureChest treasureChestScript;
+
     public GameObject[] trollsArray;
     public List<GameObject> trollsList;
     public List<Transform> trollTransform = new List<Transform>();
@@ -18,7 +20,6 @@ public class GameController : MonoBehaviour
 
 
 
-
     void Start() {
         //Add the enemies we have
         trollsArray = GameObject.FindGameObjectsWithTag("Troll");
@@ -26,6 +27,7 @@ public class GameController : MonoBehaviour
 
         dwarfsList.AddRange(dwarfsArray);
         trollsList.AddRange(trollsArray);
+
 
         for (int i = 0; i < dwarfsList.Count; i++)
         {
@@ -40,92 +42,46 @@ public class GameController : MonoBehaviour
     }
 
     void Update() {
+        //if (Time.frameCount % 3)
+        //{
+
+        //}
+        treasureChestScript.UpdateState(trollTransform);
+
         for (int i = 0; i < dwarfsList.Count; i++)
         {
-            if (dwarfsList[i] != null)
-            {
-                dwarfTransform[i] = dwarfsList[i].transform;
-            }
-            else
-            {
-                dwarfsList.RemoveAt(i);
-                dwarfTransform.RemoveAt(i);
-                Debug.Log("Debuged list");
-            }
+            dwarfTransform[i] = dwarfsList[i].transform;
         }
         for (int i = 0; i < trollsList.Count; i++)
         {
-            if (trollsList[i] != null)
-            {
-                trollTransform[i] = trollsList[i].transform;
-            }
-            else
-            {
-                trollsList.RemoveAt(i);
-                trollTransform.RemoveAt(i);
-            }
+            trollTransform[i] = trollsList[i].transform;
         }
+        
+        //Remove object from lists if the object is dead
 
-
-
-        //Null check
-        for (int i = 0; i < trollsList.Count; i++)
-        {
-            if (trollsList[i] == null)
-            {
-                trollsList.RemoveAt(i);
-            }
-        }
-        for (int i = 0; i < trollTransform.Count; i++)
-        {
-            if (trollTransform[i] == null)
-            {
-                trollTransform.RemoveAt(i);
-            }
-        }
         for (int i = 0; i < trollScriptList.Count; i++)
         {
-            if (trollScriptList[i] == null)
+            if (trollScriptList[i].isDead == true)
             {
                 trollScriptList.RemoveAt(i);
+                trollTransform.RemoveAt(i);
+                trollsList.RemoveAt(i);
             }
         }
-        for (int i = 0; i < dwarfTransform.Count; i++)
+        for (int i = 0; i < dwarfScriptList.Count; i++)
         {
-            if (dwarfTransform[i] == null)
+            if (dwarfScriptList[i].isDead == true)
             {
+                dwarfScriptList.RemoveAt(i);
                 dwarfTransform.RemoveAt(i);
-                Debug.Log("Debuged transform");
-            }
-        }
-        for (int i = 0; i < dwarfsList.Count; i++)
-        {
-            if (dwarfsList[i] == null)
-            {
                 dwarfsList.RemoveAt(i);
-                Debug.Log("Debuged list");
-            }
-        }
-        for (int i = 0; i < trollScriptList.Count; i++)
-        {
-            if (trollScriptList[i] == null)
-            {
-                trollScriptList.RemoveAt(i);
-                Debug.Log("Debuged scriptlist");
             }
         }
 
         //Update all enemies to see if they should change state and move/attack player
         for (int i = 0; i < trollScriptList.Count; i++)
         {
-            if (trollScriptList[i] != null)
-            {
-                trollScriptList[i].UpdateState(treasureChest, dwarfTransform);
-            }
-            else
-            {
-                trollScriptList.RemoveAt(i);
-            }
+            trollScriptList[i].UpdateState(treasureChest, dwarfTransform);
         }
         for (int i = 0; i < dwarfScriptList.Count; i++)
         {
