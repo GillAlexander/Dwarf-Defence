@@ -8,7 +8,7 @@ public class GameController : MonoBehaviour
     public Transform treasureChest;
     public TreasureChest treasureChestScript;
 
-    public GameObject[] trollsArray;
+    private GameObject[] trollsArray;
     public List<GameObject> trollsList;
     public List<Transform> trollTransform = new List<Transform>();
     public List<Troll> trollScriptList = new List<Troll>();
