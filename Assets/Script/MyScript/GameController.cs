@@ -3,8 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class GameController : MonoBehaviour
-{
+public class GameController : MonoBehaviour {
     public Transform treasureChest;
     public TreasureChest treasureChestScript;
 
@@ -56,7 +55,7 @@ public class GameController : MonoBehaviour
         {
             trollTransform[i] = trollsList[i].transform;
         }
-        
+
         //Remove object from lists if the object is dead
 
         for (int i = 0; i < trollScriptList.Count; i++)
@@ -88,7 +87,7 @@ public class GameController : MonoBehaviour
             dwarfScriptList[i].UpdateState(treasureChest, trollTransform);
         }
     }
-    
+
     private void OnGUI() {
         //if (GUI.Button(new Rect(10, 450, 150, 100), "I am a button"))
         //{

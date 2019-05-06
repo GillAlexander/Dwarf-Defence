@@ -14,9 +14,10 @@ public class MoveUnitsToRayCastLine : MonoBehaviour {
     }
 
     void Update() {
-
-        foreach (var selectableObject in unit.selectedObjects) {
-            for (int i = 0; i < list.positionList.Count; i++) {
+        foreach (var selectableObject in unit.selectedObjects)
+        {
+            for (int i = 0; i < list.positionList.Count; i++)
+            {
                 unit.agents[i].SetDestination(list.positionList[i]);
             }
         }

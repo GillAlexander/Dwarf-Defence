@@ -208,6 +208,7 @@ public class Troll : MonoBehaviour
         Destroy(GetComponent<NavMeshAgent>());
         Destroy(GetComponent<CapsuleCollider>());
         Destroy(GetComponentInChildren<Canvas>());
+        Destroy(GetComponentInChildren<MeshCollider>());
         isDead = true;
         trollAnimator.SetBool("trollDie", true);
     }

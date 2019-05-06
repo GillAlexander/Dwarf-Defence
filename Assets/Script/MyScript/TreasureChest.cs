@@ -3,33 +3,28 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class TreasureChest : MonoBehaviour
-{
+public class TreasureChest : MonoBehaviour {
     public float gold;
     public NavMeshAgent chestAgent;
     private float distanceToTrolls;
     public Animator dwarfAnimator;
     string descriptiveText;
     string instructionText;
-    void Start()
-    {
+    void Start() {
 
     }
-    public treasureStates GetMyState()
-    {
+    public treasureStates GetMyState() {
         return currentTreasureState;
     }
 
     treasureStates currentTreasureState = treasureStates.DefenceMode;
-    public enum treasureStates
-    {
+    public enum treasureStates {
         FollowMode,
         DefenceMode
     }
 
-    
-    public void UpdateState(List<Transform> trollTransform)
-    {
+
+    public void UpdateState(List<Transform> trollTransform) {
         distanceToTrolls = (transform.position - GetClosestEnemy(trollTransform).position).magnitude;
 
         switch (currentTreasureState)
@@ -58,6 +53,10 @@ public class TreasureChest : MonoBehaviour
                 break;
 
             case treasureStates.DefenceMode:
+                if (chestAgent.velocity == Vector3.zero)
+                {
+                    dwarfAnimator.SetBool("dwarfMove", false);
+                }
                 descriptiveText = "You are now in DefenceMode";
                 instructionText = "Controll your troops";
                 if (distanceToTrolls <= 4)
@@ -76,8 +75,7 @@ public class TreasureChest : MonoBehaviour
                 break;
         }
     }
-    Transform GetClosestEnemy(List<Transform> allEnemyTranform)
-    {
+    Transform GetClosestEnemy(List<Transform> allEnemyTranform) {
         Transform bestTarget = null;
         float closestDistanceSqr = Mathf.Infinity;
         Vector3 currentPosition = this.transform.position;
@@ -94,8 +92,7 @@ public class TreasureChest : MonoBehaviour
         return bestTarget;
     }
 
-    public void removeGold(int ammount)
-    {
+    public void removeGold(int ammount) {
         gold -= ammount;
 
         if (gold <= 0)
@@ -103,24 +100,27 @@ public class TreasureChest : MonoBehaviour
             Debug.Log("You lose the game");
         }
     }
-    private void OnTriggerEnter(Collider other)
-    {
+    bool showWin;
+    private void OnTriggerEnter(Collider other) {
         if (other.CompareTag("winArea"))
         {
-            Debug.Log("YOU HAVE WON THE GAME");
+            showWin = true;
         }
     }
-    public int valueY, valueX, width, height;
 
     private void OnGUI() {
-
-        GUI.Box(new Rect(20, 20, 200, 40), descriptiveText);
-        GUI.Box(new Rect(20, 60, 200, 40), instructionText);
-        
+        if (showWin)
+        {
+            GUI.Box(new Rect(40, 40, 300, 40), "YOU WON THE GAME");
+        }
+        else
+        {
+            GUI.Box(new Rect(20, 20, 200, 40), descriptiveText);
+            GUI.Box(new Rect(20, 60, 200, 40), instructionText);
+        }
     }
 
-    void Update()
-    {
+    void Update() {
 
     }
 }

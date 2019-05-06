@@ -18,6 +18,10 @@ public class GameManager : MonoBehaviour
         {
             SceneManager.LoadScene("LINE RENDERING TEST");
         }
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            Application.Quit();
+        }
     }
 
 }
