@@ -17,17 +17,22 @@ public class GameController : MonoBehaviour {
     public List<Transform> dwarfTransform = new List<Transform>();
     public List<Dwarf> dwarfScriptList = new List<Dwarf>();
 
+    public GameObject[] dwarfUnitArray; 
+    public List<DwarfUnit> dwarfUnitTest = new List<DwarfUnit>();
 
 
     void Start() {
         //Add the enemies we have
         trollsArray = GameObject.FindGameObjectsWithTag("Troll");
         dwarfsArray = GameObject.FindGameObjectsWithTag("Dwarf");
+        dwarfUnitArray = GameObject.FindGameObjectsWithTag("newDwarf");
 
         dwarfsList.AddRange(dwarfsArray);
         trollsList.AddRange(trollsArray);
-
-
+        for (int i = 0; i < dwarfUnitArray.Length; i++)
+        {
+            dwarfUnitTest.Add(dwarfUnitArray[i].GetComponent<DwarfUnit>());
+        }
         for (int i = 0; i < dwarfsList.Count; i++)
         {
             dwarfTransform.Add(dwarfsList[i].transform);
@@ -41,6 +46,10 @@ public class GameController : MonoBehaviour {
     }
 
     void Update() {
+        for (int i = 0; i < dwarfUnitTest.Count; i++)
+        {
+            dwarfUnitTest[i].UpdateState(treasureChest, trollTransform);
+        }
         //if (Time.frameCount % 3)
         //{
 

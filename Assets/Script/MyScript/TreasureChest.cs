@@ -30,13 +30,11 @@ public class TreasureChest : MonoBehaviour {
         switch (currentTreasureState)
         {
             case treasureStates.FollowMode:
-                descriptiveText = "You are now in FollowMode";
                 instructionText = "Controll your cart";
                 if (Input.GetKeyDown(KeyCode.F))
                 {
                     currentTreasureState = treasureStates.DefenceMode;
                 }
-                Debug.Log("FollowMode");
                 if (distanceToTrolls <= 4)
                 {
                     Debug.Log("RemovedGold");
@@ -68,7 +66,6 @@ public class TreasureChest : MonoBehaviour {
                 {
                     currentTreasureState = treasureStates.FollowMode;
                 }
-                Debug.Log("DefenceMode");
                 break;
 
             default:

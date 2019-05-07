@@ -6,14 +6,8 @@ using UnityEngine.UI;
 
 public class Dwarf : MonoBehaviour {
     public float health;
-    public Transform treasureChest;
     public NavMeshAgent dwarfAgent;
     public Slider hpSlider;
-    public int Damage = 5;
-    public float Distance;
-    public float WeaponRange = 1.5F;
-    public float attackDelay = 1f; //seconds
-    private float lastAttackAt = -999f;
     public bool isDead;
     dwarfStates currentDwarfState = dwarfStates.Idle;
     dwarfMajorStates currentMajorDwarfState = dwarfMajorStates.DefenceMode;
@@ -38,7 +32,6 @@ public class Dwarf : MonoBehaviour {
         TakeDamage,
         Die,
     }
-
 
     public void UpdateState(Transform treasureChest, List<Transform> enemyTransform) {
 
@@ -177,14 +170,6 @@ public class Dwarf : MonoBehaviour {
         if (enemyWeapon.CompareTag("trollWeapon"))
         {
             ApplyDamage(10);
-        }
-    }
-
-    void Attack(Troll target) {
-        if (Time.time > lastAttackAt + attackDelay)
-        {
-            lastAttackAt = Time.time;
-            target.ApplyDamage(Damage);
         }
     }
 

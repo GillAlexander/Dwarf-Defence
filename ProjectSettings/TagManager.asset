@@ -13,6 +13,7 @@ TagManager:
   - Troll
   - Dwarf
   - winArea
+  - newDwarf
   layers:
   - Default
   - TransparentFX
