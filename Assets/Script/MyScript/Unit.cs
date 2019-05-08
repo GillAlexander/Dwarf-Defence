@@ -4,13 +4,15 @@ using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.UI;
 
-public enum trollMajorStates
-{
-
-}
 public enum trollStates
 {
-
+    Idle,
+    Patrol,
+    ChargeToAttack,
+    DoAttack,
+    moveTowardsChest,
+    Steal,
+    Flee
 }
 public enum dwarfMajorStates
 {

@@ -12,11 +12,6 @@ public class GameController : MonoBehaviour {
     public List<Transform> trollTransform = new List<Transform>();
     public List<Troll> trollScriptList = new List<Troll>();
 
-    public GameObject[] dwarfsArray;
-    public List<GameObject> dwarfsList;
-    public List<Transform> dwarfTransform = new List<Transform>();
-    public List<Dwarf> dwarfScriptList = new List<Dwarf>();
-
     public GameObject[] dwarfUnitArray;
     public List<GameObject> dwarfUnitList = new List<GameObject>();
     public List<Transform> dwarfUnitTransform = new List<Transform>();
@@ -27,10 +22,8 @@ public class GameController : MonoBehaviour {
     void Start() {
         //Add the enemies we have
         trollsArray = GameObject.FindGameObjectsWithTag("Troll");
-        dwarfsArray = GameObject.FindGameObjectsWithTag("Dwarf");
         dwarfUnitArray = GameObject.FindGameObjectsWithTag("newDwarf");
-
-        dwarfsList.AddRange(dwarfsArray);
+        
         trollsList.AddRange(trollsArray);
         dwarfUnitList.AddRange(dwarfUnitArray);
 
@@ -38,11 +31,6 @@ public class GameController : MonoBehaviour {
         {
             dwarfUnitTransform.Add(dwarfUnitList[i].transform);
             dwarfUnitScriptList.Add(dwarfUnitList[i].GetComponent<DwarfUnit>());
-        }
-        for (int i = 0; i < dwarfsList.Count; i++)
-        {
-            dwarfTransform.Add(dwarfsList[i].transform);
-            dwarfScriptList.Add(dwarfsList[i].GetComponent<Dwarf>());
         }
         for (int i = 0; i < trollsList.Count; i++)
         {
@@ -58,17 +46,12 @@ public class GameController : MonoBehaviour {
         //}
         treasureChestScript.UpdateState(trollTransform);
 
-        for (int i = 0; i < dwarfsList.Count; i++)
-        {
-            dwarfTransform[i] = dwarfsList[i].transform;
-        }
         for (int i = 0; i < trollsList.Count; i++)
         {
             trollTransform[i] = trollsList[i].transform;
         }
 
         //Remove object from lists if the object is dead
-
         for (int i = 0; i < trollScriptList.Count; i++)
         {
             if (trollScriptList[i].isDead == true)
@@ -76,15 +59,6 @@ public class GameController : MonoBehaviour {
                 trollScriptList.RemoveAt(i);
                 trollTransform.RemoveAt(i);
                 trollsList.RemoveAt(i);
-            }
-        }
-        for (int i = 0; i < dwarfScriptList.Count; i++)
-        {
-            if (dwarfScriptList[i].isDead == true)
-            {
-                dwarfScriptList.RemoveAt(i);
-                dwarfTransform.RemoveAt(i);
-                dwarfsList.RemoveAt(i);
             }
         }
         for (int i = 0; i < dwarfUnitScriptList.Count; i++)
@@ -101,10 +75,6 @@ public class GameController : MonoBehaviour {
         for (int i = 0; i < trollScriptList.Count; i++)
         {
             trollScriptList[i].UpdateState(treasureChest, dwarfUnitTransform);
-        }
-        for (int i = 0; i < dwarfScriptList.Count; i++)
-        {
-            dwarfScriptList[i].UpdateState(treasureChest, trollTransform);
         }
         for (int i = 0; i < dwarfUnitScriptList.Count; i++)
         {
