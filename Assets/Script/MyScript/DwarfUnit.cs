@@ -14,7 +14,7 @@ public class DwarfUnit : Unit
         health = 100;
         unitAgent = GetComponent<NavMeshAgent>();
         hpSlider = GetComponentInChildren<Slider>();
-        unitAnimator = GetComponent<Animator>();
+        unitAnimator = GetComponentInChildren<Animator>();
         isDead = false;
     }
 
@@ -37,11 +37,18 @@ public class DwarfUnit : Unit
                 }
                 unitAnimator.SetBool("dwarfAttack", true);
                 unitAnimator.SetBool("dwarfMove", false);
-                if (distanceToTreasure < 10)
+                if (distanceToTreasure < 100)
                 {
-                    //dwarfAgent.isStopped = true;
+                    unitAgent.isStopped = true;
                     unitAnimator.SetBool("dwarfAttack", false);
                     unitAnimator.SetBool("dwarfMove", false);
+                }
+                else
+                {
+                    unitAgent.isStopped = false;
+                    unitAgent.SetDestination(treasureChest.position);
+                    unitAnimator.SetBool("dwarfAttack", false);
+                    unitAnimator.SetBool("dwarfMove", true);
                 }
                 break;
             case dwarfMajorStates.DefenceMode:
@@ -49,6 +56,10 @@ public class DwarfUnit : Unit
                 if (Input.GetKeyDown(KeyCode.F))
                 {
                     currentMajorDwarfState = dwarfMajorStates.FollowMode;
+                }
+                if (distanceToEnemy < 50)
+                {
+                    transform.LookAt(GetClosestEnemy(enemyTransform).position);
                 }
                 switch (currentDwarfState)
                 {
@@ -99,7 +110,15 @@ public class DwarfUnit : Unit
     }
     void Update()
     {
-
+        hpSlider.transform.LookAt(Camera.main.transform);
     }
-
+    public void OnTriggerEnter(Collider enemyWeapon)
+    {
+        if (enemyWeapon.CompareTag("trollWeapon"))
+        {
+            ApplyDamage(10);
+            hpSlider.value = health;
+            Debug.Log("TAKINGDAMAGE");
+        }
+    }
 }

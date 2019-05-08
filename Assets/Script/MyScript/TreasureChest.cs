@@ -30,6 +30,7 @@ public class TreasureChest : MonoBehaviour {
         switch (currentTreasureState)
         {
             case treasureStates.FollowMode:
+                descriptiveText = "You are now in FollowMode";
                 instructionText = "Controll your cart";
                 if (Input.GetKeyDown(KeyCode.F))
                 {

@@ -17,9 +17,12 @@ public class GameController : MonoBehaviour {
     public List<Transform> dwarfTransform = new List<Transform>();
     public List<Dwarf> dwarfScriptList = new List<Dwarf>();
 
-    public GameObject[] dwarfUnitArray; 
-    public List<DwarfUnit> dwarfUnitTest = new List<DwarfUnit>();
-
+    public GameObject[] dwarfUnitArray;
+    public List<GameObject> dwarfUnitList = new List<GameObject>();
+    public List<Transform> dwarfUnitTransform = new List<Transform>();
+    public List<DwarfUnit> dwarfUnitScriptList = new List<DwarfUnit>();
+    
+    
 
     void Start() {
         //Add the enemies we have
@@ -29,9 +32,12 @@ public class GameController : MonoBehaviour {
 
         dwarfsList.AddRange(dwarfsArray);
         trollsList.AddRange(trollsArray);
-        for (int i = 0; i < dwarfUnitArray.Length; i++)
+        dwarfUnitList.AddRange(dwarfUnitArray);
+
+        for (int i = 0; i < dwarfUnitList.Count; i++)
         {
-            dwarfUnitTest.Add(dwarfUnitArray[i].GetComponent<DwarfUnit>());
+            dwarfUnitTransform.Add(dwarfUnitList[i].transform);
+            dwarfUnitScriptList.Add(dwarfUnitList[i].GetComponent<DwarfUnit>());
         }
         for (int i = 0; i < dwarfsList.Count; i++)
         {
@@ -46,10 +52,6 @@ public class GameController : MonoBehaviour {
     }
 
     void Update() {
-        for (int i = 0; i < dwarfUnitTest.Count; i++)
-        {
-            dwarfUnitTest[i].UpdateState(treasureChest, trollTransform);
-        }
         //if (Time.frameCount % 3)
         //{
 
@@ -85,15 +87,28 @@ public class GameController : MonoBehaviour {
                 dwarfsList.RemoveAt(i);
             }
         }
+        for (int i = 0; i < dwarfUnitScriptList.Count; i++)
+        {
+            if (dwarfUnitScriptList[i].isDead == true)
+            {
+                dwarfUnitScriptList.RemoveAt(i);
+                dwarfUnitTransform.RemoveAt(i);
+                dwarfUnitList.RemoveAt(i);
+            }
+        }
 
         //Update all enemies to see if they should change state and move/attack player
         for (int i = 0; i < trollScriptList.Count; i++)
         {
-            trollScriptList[i].UpdateState(treasureChest, dwarfTransform);
+            trollScriptList[i].UpdateState(treasureChest, dwarfUnitTransform);
         }
         for (int i = 0; i < dwarfScriptList.Count; i++)
         {
             dwarfScriptList[i].UpdateState(treasureChest, trollTransform);
+        }
+        for (int i = 0; i < dwarfUnitScriptList.Count; i++)
+        {
+            dwarfUnitScriptList[i].UpdateState(treasureChest, trollTransform);
         }
     }
 

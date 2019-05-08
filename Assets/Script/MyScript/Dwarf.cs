@@ -4,7 +4,8 @@ using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.UI;
 
-public class Dwarf : MonoBehaviour {
+public class Dwarf : MonoBehaviour
+{
     public float health;
     public NavMeshAgent dwarfAgent;
     public Slider hpSlider;
@@ -14,18 +15,22 @@ public class Dwarf : MonoBehaviour {
     private float distanceToTrolls;
     public Animator dwarfAnimator;
 
-    void Start() {
+    void Start()
+    {
 
     }
 
-    public dwarfMajorStates GetMyState() {
+    public dwarfMajorStates GetMyState()
+    {
         return currentMajorDwarfState;
     }
-    public enum dwarfMajorStates {
+    public enum dwarfMajorStates
+    {
         FollowMode,
         DefenceMode,
     }
-    public enum dwarfStates {
+    public enum dwarfStates
+    {
         Idle,
         Move,
         Attack,
@@ -33,7 +38,8 @@ public class Dwarf : MonoBehaviour {
         Die,
     }
 
-    public void UpdateState(Transform treasureChest, List<Transform> enemyTransform) {
+    public void UpdateState(Transform treasureChest, List<Transform> enemyTransform)
+    {
 
         distanceToTrolls = (transform.position - GetClosestEnemy(enemyTransform).position).magnitude;
         switch (currentMajorDwarfState)
@@ -130,7 +136,8 @@ public class Dwarf : MonoBehaviour {
             default:
                 break;
         }
-        Transform GetClosestEnemy(List<Transform> allEnemyTranform) {
+        Transform GetClosestEnemy(List<Transform> allEnemyTranform)
+        {
             Transform bestTarget = null;
             float closestDistanceSqr = Mathf.Infinity;
             Vector3 currentPosition = this.transform.position;
@@ -148,7 +155,8 @@ public class Dwarf : MonoBehaviour {
         }
     }
 
-    public void ApplyDamage(int damage) {
+    public void ApplyDamage(int damage)
+    {
 
         health -= damage;
 
@@ -158,7 +166,8 @@ public class Dwarf : MonoBehaviour {
         }
     }
 
-    private void Dead() {
+    private void Dead()
+    {
         Destroy(GetComponent<NavMeshAgent>());
         Destroy(GetComponent<CapsuleCollider>());
         Destroy(GetComponentInChildren<Canvas>());
@@ -166,14 +175,16 @@ public class Dwarf : MonoBehaviour {
         isDead = true;
     }
 
-    private void OnTriggerEnter(Collider enemyWeapon) {
+    private void OnTriggerEnter(Collider enemyWeapon)
+    {
         if (enemyWeapon.CompareTag("trollWeapon"))
         {
             ApplyDamage(10);
         }
     }
 
-    void Update() {
+    void Update()
+    {
         hpSlider.value = health;
         hpSlider.transform.LookAt(Camera.main.transform);
     }

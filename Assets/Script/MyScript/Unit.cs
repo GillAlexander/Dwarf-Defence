@@ -32,7 +32,7 @@ public class Unit : MonoBehaviour, IEUnit
     protected float distanceToTreasure;
     protected NavMeshAgent unitAgent;
     protected Slider hpSlider;
-    protected bool isDead;
+    public bool isDead;
     protected Animator unitAnimator;
 
     public void ApplyDamage(byte Damage)
@@ -74,6 +74,5 @@ public class Unit : MonoBehaviour, IEUnit
         }
         return bestTarget;
     }
-
 
 }
